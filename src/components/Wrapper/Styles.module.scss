@@ -1,0 +1,12 @@
+@use "theme/_variables.scss" as *;
+
+.wrapper {
+  @include flex;
+  padding: var(--padding-page);
+  min-height: 100vh;
+  width: 100%;
+
+  @media screen and (max-width: 1000px) {
+    padding: var(--padding-content);
+  }
+}

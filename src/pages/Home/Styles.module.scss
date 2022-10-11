@@ -1,0 +1,30 @@
+@use "theme/_variables.scss" as *;
+
+.home {
+  padding: 0;
+  .homeHero {
+    background-image: url("https://elbilsprylar.wpcomstaging.com/wp-content/uploads/2022/09/home-bg-image.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    position: relative;
+    padding: var(--padding-page) var(--padding-content);
+    height: 560px;
+    @include flex;
+    align-items: flex-start;
+
+    @media screen and (min-width: 1000px) {
+      padding: 6rem;
+    }
+
+    @media screen and (max-width: 1000px) {
+      justify-content: center;
+    }
+
+    blockquote {
+      color: #f8f8f8;
+      max-width: 15ch;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@use "theme/_variables.scss" as *;
+
+.btn {
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.8rem 2.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background: #fff;
+    color: var(--color-primary);
+
+    svg {
+      * {
+        fill: var(--color-primary);
+      }
+    }
+  }
+
+  p {
+    color: #fff;
+    line-height: 1;
+  }
+}

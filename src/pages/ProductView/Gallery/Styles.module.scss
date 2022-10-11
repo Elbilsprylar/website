@@ -1,0 +1,33 @@
+@use "theme/_variables.scss" as *;
+
+.galleryContainer {
+  @include flex;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: var(--padding-grid);
+
+  .mainImage {
+    max-width: 550px;
+    // border: solid 2px #ddd;
+    border-radius: 6px;
+  }
+
+  .imgsList {
+    @include flex;
+    gap: var(--padding-grid);
+
+    li {
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      border: solid 2px #ddd;
+      border-radius: 6px;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

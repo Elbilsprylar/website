@@ -1,0 +1,107 @@
+@use "theme/_variables.scss" as *;
+
+.footerWrapper {
+  position: relative;
+  padding: var(--padding-page);
+  background: var(--footer-color);
+  @include flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  @media screen and (max-width: 920px) {
+    flex-direction: column-reverse;
+    padding: var(--padding-content);
+    align-items: flex-start;
+  }
+
+  @media screen and (min-width: 920px) {
+    height: 520px;
+  }
+
+  section {
+    height: 100%;
+    @include flex;
+    align-items: flex-start;
+    text-align: left;
+    margin-right: 12%;
+    z-index: 2;
+
+    @media screen and (max-width: 920px) {
+      margin-top: var(--padding-content);
+    }
+
+    h3 {
+      margin-bottom: var(--padding-grid);
+    }
+
+    ul {
+      max-height: 60%;
+      @include flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: var(--padding-grid);
+    }
+  }
+
+  .helpLinks {
+    li {
+      a {
+        @include flex;
+        flex-direction: row;
+        gap: var(--padding-grid);
+
+        p {
+          color: #bbb;
+        }
+      }
+    }
+  }
+
+  .categoriesLinks {
+    li {
+      margin-right: var(--padding-content);
+    }
+  }
+
+  .paymetMthd {
+    margin-top: auto;
+
+    div {
+      @include flex;
+      flex-direction: row;
+      gap: var(--padding-grid);
+    }
+
+    @media screen and (max-width: 920px) {
+      margin-top: var(--padding-content);
+    }
+  }
+
+  .logo {
+    z-index: 2;
+
+    @media screen and (max-width: 920px) {
+      margin-top: var(--padding-content);
+      width: 100%;
+    }
+
+    @media screen and (min-width: 920px) {
+      position: absolute;
+      bottom: var(--padding-page);
+      right: var(--padding-page);
+    }
+  }
+
+  .footerBg {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    right: -100px;
+    height: 100%;
+    z-index: 1;
+
+    @media screen and (max-width: 920px) {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@use "theme/_variables.scss" as *;
+
+.wrapper {
+  @include flex;
+  flex-direction: row;
+  font-size: 0.9rem;
+
+  p {
+    margin: 0 var(--padding-grid);
+    color: var(--color-text-muted);
+  }
+
+  a {
+    color: #999;
+    @include transition;
+
+    &:hover {
+      color: #444;
+    }
+  }
+
+  .active {
+    color: #444;
+    pointer-events: none;
+  }
+}

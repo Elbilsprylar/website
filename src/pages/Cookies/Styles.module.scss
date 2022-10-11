@@ -1,0 +1,19 @@
+@use "theme/_variables.scss" as *;
+
+.wrapper {
+  .content {
+    text-align: left;
+    margin-top: var(--padding-content);
+
+    p {
+      margin-top: var(--padding-content);
+    }
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

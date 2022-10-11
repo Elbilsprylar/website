@@ -1,0 +1,356 @@
+@use "theme/_variables.scss" as *;
+
+nav {
+  position: sticky;
+  top: 0;
+  background: var(--navbar-color);
+  @include transition;
+  z-index: 99;
+}
+
+.appNavShown {
+  transform: translateY(-138px);
+}
+
+.upperBar {
+  width: 100%;
+  height: 40px;
+  background: var(--upper-bar-color);
+  @include flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0 var(--padding-grid);
+  position: relative;
+  font-size: 0.9rem;
+
+  @media screen and (max-width: 1000px) {
+    justify-content: space-between;
+    padding-right: var(--padding-page);
+  }
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+
+  * {
+    color: #eee;
+  }
+
+  &__item {
+    @include flex;
+    flex-direction: row;
+
+    svg {
+      margin-right: 1rem;
+    }
+  }
+
+  .storeTxt {
+    @media screen and (min-width: 1000px) {
+      position: absolute;
+      right: 50%;
+      transform: translateX(50%);
+    }
+  }
+
+  .telTimes {
+    height: 100%;
+    z-index: 1;
+    background-color: var(--upper-bar-color);
+    cursor: pointer;
+
+    svg {
+      margin: 0 1rem;
+    }
+  }
+
+  .telContainer {
+    background: var(--upper-bar-color);
+    padding: 0 calc(var(--padding-grid) / 2);
+    @include flex;
+    flex-direction: row;
+    position: absolute;
+    top: 100%;
+    height: 0;
+    overflow: hidden;
+    @include transition;
+    z-index: 3;
+    cursor: initial;
+
+    section {
+      @include flex;
+      align-items: flex-start;
+      width: 50%;
+      padding: 0 var(--padding-content);
+
+      &:last-of-type {
+        border-left: solid #eee 1px;
+      }
+
+      h4 {
+        margin-bottom: calc(var(--padding-grid) / 2);
+      }
+
+      p,
+      ul {
+        text-align: left;
+        color: #ccc;
+      }
+      ul {
+        padding-left: var(--padding-grid);
+        margin: calc(var(--padding-grid) / 2) 0 var(--padding-grid);
+        list-style: disc;
+      }
+
+      a {
+        width: 100%;
+        padding: calc(var(--padding-grid) / 2);
+        background: #eee;
+        color: var(--upper-bar-color);
+        border-radius: 0.2rem;
+      }
+    }
+  }
+
+  .telContainerShown {
+    height: 220px;
+    padding: var(--padding-grid) calc(var(--padding-grid) / 2);
+  }
+
+  .arrowDown {
+    margin-left: var(--padding-grid);
+    @include transition;
+  }
+}
+
+.topSection {
+  @include flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1.5rem 6rem 0;
+  padding-bottom: 1.5rem;
+
+  @media screen and (min-width: 1000px) {
+    border-bottom: solid #fff4;
+  }
+
+  .searchContainer {
+    background: #fff;
+    border-radius: 2rem;
+    min-width: 280px;
+
+    input {
+      border: none;
+      padding: var(--padding-grid) 0;
+      font-size: 0.9rem;
+      width: 80%;
+    }
+
+    @media screen and (min-width: 1200px) {
+      min-width: 500px;
+    }
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+}
+
+.cartCounter {
+  position: relative;
+  margin-left: var(--padding-grid);
+
+  p {
+    background: var(--alert-color);
+    padding: 4px 6px;
+    font-size: var(--font-small);
+    border-radius: 2rem;
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    color: #fff;
+
+    @media screen and (max-width: 1000px) {
+      padding: 1px 6px;
+    }
+  }
+}
+
+.bottomSection {
+  overflow-y: hidden;
+  ul {
+    @include flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0.6rem 0;
+
+    a {
+      font-size: 0.9rem;
+      position: relative;
+      padding: 0.4rem 1.5rem;
+      margin: 0 0.5rem;
+      border-radius: 2rem;
+      @include transition;
+
+      &:hover {
+        color: #fff;
+        background-color: #fff2;
+      }
+
+      @media screen and (max-width: 1200px) {
+        padding: 0.4rem var(--padding-grid);
+      }
+    }
+
+    .activeLink {
+      color: #fff;
+      background-color: #fff2;
+      overflow: hidden;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+}
+
+// MOBILE VIEW
+
+.mobileNave {
+  .topSection {
+    margin: 0 var(--padding-content);
+    padding: var(--padding-grid) 0;
+  }
+
+  @media screen and (min-width: 1000px) {
+    display: none;
+  }
+}
+
+.mobileNavMenuContainer {
+  width: 100%;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  bottom: 0;
+  background: var(--navbar-color);
+  overflow-y: scroll;
+  @include transition;
+
+  header {
+    @include flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: var(--padding-grid) 0;
+    margin: 0 var(--padding-content);
+    border-bottom: solid #fff4 2px;
+  }
+
+  .MenuHeader {
+    @include flex;
+    flex-direction: row;
+    padding: var(--padding-grid) 0;
+    margin: 0 var(--padding-content);
+
+    .menuIcon {
+      margin-right: var(--padding-content);
+    }
+
+    .bottomSectionSearch {
+      flex: 6;
+      .searchContainer {
+        width: 100%;
+        background: #fff;
+        border-radius: 2rem;
+
+        input {
+          border: none;
+          padding: var(--padding-grid) 0;
+          font-size: 0.9rem;
+          width: 80%;
+        }
+      }
+    }
+  }
+
+  .mobileNavMenu {
+    @include flex;
+    align-items: stretch;
+
+    @media screen and (min-width: 1000px) {
+      display: none;
+    }
+
+    ul {
+      padding: 0 var(--padding-content);
+    }
+
+    .mobileNavMenuItem {
+      border-top: solid #fff4 2px;
+      text-align: left;
+      color: #f2f2f2;
+      padding: var(--padding-grid) 0;
+      margin: 0 var(--padding-content);
+
+      p {
+        color: #f2f2f2;
+      }
+
+      &:last-of-type {
+        border-bottom: solid #fff4 2px;
+      }
+    }
+
+    div {
+      @include flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .mobileNavCategories {
+      @include flex;
+      align-items: stretch;
+      height: 0;
+      overflow: hidden;
+      @include transition;
+
+      a {
+        border-top: solid #fff2 2px;
+        text-align: left;
+        color: #bbb;
+        padding: 0.9rem var(--padding-content);
+        margin: 0 var(--padding-content);
+        @include transition;
+      }
+    }
+
+    .mobileNavCategoriesShown {
+      height: 460px;
+    }
+
+    .arrowDown {
+      margin-right: var(--padding-grid);
+      @include transition;
+    }
+  }
+}
+
+.mobileNavMenuContainerShown {
+  right: 0;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+}
+
+// Animations
+
+@keyframes slidein {
+  from {
+    left: -100%;
+  }
+
+  to {
+    left: 0;
+  }
+}

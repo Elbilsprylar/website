@@ -1,0 +1,74 @@
+@use "theme/_variables.scss" as *;
+
+.products {
+  // background: #fff;
+  position: relative;
+  align-items: flex-start;
+  padding: var(--padding-page) var(--padding-grid);
+
+  @media screen and (min-width: 1000px) {
+    padding: var(--padding-page) var(--padding-content);
+  }
+
+  .breadcrumbsWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: var(--color-breadcrumbs-wrapper);
+    padding: 0.5rem var(--padding-content);
+
+    @media screen and (min-width: 1000px) {
+      padding: 0.5rem calc(var(--padding-page) * 1.5);
+    }
+  }
+
+  article {
+    text-align: left;
+    border-bottom: solid #ddd 2px;
+    margin-top: var(--padding-grid);
+
+    min-width: 100%;
+
+    @media screen and (min-width: 1000px) {
+      margin-top: var(--padding-content);
+      min-width: 300px;
+      margin-left: var(--padding-page);
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 0.5rem 0 var(--padding-grid);
+      color: var(--color-text-muted);
+    }
+  }
+
+  .productsContainer {
+    padding-top: var(--padding-page);
+    margin: 0 auto;
+    display: grid;
+    gap: 0.5rem;
+    // grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+
+    @media screen and (min-width: 1100px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media screen and (min-width: 1400px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,14 +1,20 @@
 {
-  "name": "test-app01",
+  "name": "elbilsprylar",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
-    "react": "^17.0.1",
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
+    "classnames": "^2.3.2",
+    "react": "^17.0.2",
     "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-spinner-animated": "^3.1.1",
+    "sass": "^1.54.9",
     "web-vitals": "^1.1.1"
   },
   "scripts": {

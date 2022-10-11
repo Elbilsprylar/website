@@ -1,0 +1,44 @@
+@use "theme/_variables.scss" as *;
+
+.categories {
+  position: relative;
+  align-items: flex-start;
+  padding: var(--padding-page) var(--padding-content);
+
+  .breadcrumbsWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: var(--color-breadcrumbs-wrapper);
+    padding: 0.5rem var(--padding-content);
+
+    @media screen and (min-width: 1000px) {
+      padding: 0.5rem calc(var(--padding-page) * 1.5);
+    }
+  }
+
+  article {
+    text-align: left;
+    border-bottom: solid #ddd 2px;
+    margin-top: var(--padding-grid);
+
+    min-width: 100%;
+
+    @media screen and (min-width: 1000px) {
+      margin-top: var(--padding-content);
+      min-width: 300px;
+      margin-left: var(--padding-page);
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 0.5rem 0 var(--padding-grid);
+      color: var(--color-text-muted);
+    }
+  }
+}

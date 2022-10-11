@@ -1,0 +1,89 @@
+@use "theme/_variables.scss" as *;
+
+.product {
+  position: relative;
+  align-items: flex-start;
+  padding: calc(#{var(--padding-page)} * 1.5) var(--padding-page);
+  @include flex();
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-left: 10%;
+  gap: var(--padding-page);
+
+  .productContainer,
+  .productGallery {
+    flex: 0 1 50%;
+    @include flex();
+    align-items: stretch;
+    padding: var(--padding-content);
+  }
+
+  .productContainer {
+    border-left: solid 2.5px #eee;
+    max-width: 600px;
+    padding: var(--padding-content) var(--padding-page);
+  }
+
+  .breadcrumbsWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: var(--color-breadcrumbs-wrapper);
+    padding: 0.5rem var(--padding-content);
+
+    @media screen and (min-width: 1000px) {
+      padding: 0.5rem calc(var(--padding-page) * 1.5);
+    }
+  }
+
+  .productInfo {
+    text-align: left;
+    padding: 0 var(--padding-content);
+
+    p {
+      max-width: 45ch;
+    }
+
+    .productInfoDescription {
+      margin: var(--padding-grid) 0;
+      p {
+        color: var(--color-text-muted);
+      }
+    }
+  }
+
+  .productAttributes,
+  .addToCart,
+  .productStatus {
+    border-top: solid 2.5px #eee;
+    padding: calc(var(--padding-grid) * 1.5) var(--padding-content);
+    @include flex;
+    align-items: flex-start;
+    gap: calc(var(--padding-grid) / 2);
+  }
+
+  .productInfo {
+    margin-bottom: var(--padding-grid);
+  }
+
+  .addToCartBtn {
+    svg {
+      margin-left: var(--padding-grid);
+    }
+  }
+
+  .productStatus {
+    .status {
+      color: var(--positive-color);
+    }
+  }
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,0 +1,19 @@
+.cartCounter {
+  position: relative;
+  margin-left: var(--padding-grid);
+
+  p {
+    background: var(--alert-color);
+    padding: 4px 6px;
+    font-size: var(--font-small);
+    border-radius: 2rem;
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    color: #fff;
+
+    @media screen and (max-width: 1000px) {
+      padding: 1px 6px;
+    }
+  }
+}

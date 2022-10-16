@@ -1,6 +1,7 @@
 import React from "react"
 import { useParams } from "react-router-dom"
 import { GetProduct } from "providers/ProductsProvider"
+import { addToCart } from "utils/cart"
 
 import { Spinner } from "react-spinner-animated"
 import ProductOptions from "./ProductOptions/index"
@@ -16,7 +17,6 @@ const ProductsView = () => {
   const { id } = useParams()
   const data = GetProduct({ id })
   const product = !data.loading && data.data ? data.data : null
-  console.log("----", data, product)
 
   return (
     <Wrapper additionalClass={styles.product}>

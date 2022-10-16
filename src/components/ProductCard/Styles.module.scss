@@ -3,20 +3,24 @@
 .block {
   position: relative;
   margin-bottom: 1rem;
-  overflow-x: hidden;
+  // overflow-x: hidden;
   @include transition;
 
   .imgLink {
     background: #fff;
     max-width: 220px;
-    padding: var(--padding-content) 0;
+    height: 240px;
+    @include flex;
+    overflow: hidden;
 
     @media screen and (min-width: 700px) {
       max-width: 300px;
+      height: 320px;
     }
 
     img {
-      width: 80%;
+      width: auto;
+      height: 100%;
     }
   }
 
@@ -25,6 +29,33 @@
     @include flex;
     align-items: flex-start;
 
+    .productStatus {
+      color: #888;
+      font-size: 0.8rem;
+    }
+
+    // .productStatusAvailable,
+    // .productStatusUnAvailable {
+    //   width: 12px;
+    //   height: 12px;
+    //   position: absolute;
+    //   top: -6px;
+    //   right: 1rem;
+    //   color: #fff;
+    //   font-size: 0.8rem;
+    //   font-weight: bold;
+    //   font: bold 0.8rem;
+    //   border-radius: 20rem;
+    // }
+
+    // .productStatusAvailable {
+    //   background: rgb(59, 214, 59);
+    // }
+
+    // .productStatusUnAvailable {
+    //   background: rgb(214, 59, 59);
+    // }
+
     .name {
       font-weight: 700;
     }
@@ -32,7 +63,9 @@
     .price {
       color: var(--color-text-muted);
       font-size: 1.2rem;
+      // font-weight: bold;
     }
+
     .cta {
       background: var(--color-primary);
       border: none;
@@ -66,4 +99,9 @@
     //   right: -0.5rem;
     // }
   }
+}
+
+.loading {
+  opacity: 0.9;
+  pointer-events: none;
 }

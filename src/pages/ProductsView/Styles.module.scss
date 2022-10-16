@@ -51,7 +51,7 @@
     padding-top: var(--padding-page);
     margin: 0 auto;
     display: grid;
-    gap: 0.5rem;
+    gap: 1rem 0.5rem;
     // grid-template-columns: repeat(2, 1fr);
     grid-template-columns: repeat(2, minmax(100px, 1fr));
 

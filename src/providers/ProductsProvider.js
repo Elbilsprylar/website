@@ -167,11 +167,11 @@ export const GetProductsCategoriesById = ({ id }) => {
   const { data, setData } = useContext(ProductsCategoriesByIDContext)
 
   const fetchData = async () => {
-    console.log("fetching . . .")
-    console.log(
-      "fetching . . .222",
-      "products/categories" + (id ? `/${id}` : "")
-    )
+    // console.log("fetching . . .")
+    // console.log(
+    //   "fetching . . .222",
+    //   "products/categories" + (id ? `/${id}` : "")
+    // )
     try {
       const data = await api.get(`products/categories/${id}`)
 

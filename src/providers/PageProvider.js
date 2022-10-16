@@ -50,7 +50,7 @@ export const GetPageCMS = (pageId) => {
         ...prevState,
         loading: true,
       }))
-      console.log("asdasd", pageId)
+      // console.log("asdasd", pageId)
       fetchData(pageId)
     }
   }, [pageId, setData, fetchData])

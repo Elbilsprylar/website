@@ -15,7 +15,6 @@ import styles from "./Styles.module.scss"
 const ProductsView = () => {
   const productsData = GetAllProducts()
   const productsCategoriesData = GetProductsCategories()
-  console.log("productsData", productsData)
 
   return (
     <Wrapper additionalClass={styles.products}>

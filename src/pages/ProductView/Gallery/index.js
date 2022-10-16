@@ -3,7 +3,6 @@ import styles from "./Styles.module.scss"
 
 const Gallery = ({ images }) => {
   const [currentImgUrl, setCurrentImgUrl] = useState(images[0].src)
-  console.log("images", images)
   return (
     <div className={styles.galleryContainer}>
       {images.length > 0 ? (

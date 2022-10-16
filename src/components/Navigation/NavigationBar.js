@@ -5,7 +5,7 @@ import { GetCategoriesCMS } from "providers/CategoriesProvider"
 import { useScrollPosition } from "hooks/useScrollPosition"
 import styles from "./Styles.module.scss"
 
-import Button from "components/Button"
+import { CartButton } from "components/CartButton"
 import { ReactComponent as CartIcon } from "assets/cart-icon.svg"
 import { ReactComponent as StoreIcon } from "assets/store.svg"
 import { ReactComponent as TelIcon } from "assets/tel.svg"
@@ -136,7 +136,7 @@ const NavigationBar = () => {
                 />
                 <SearchIcon />
               </div>
-              <Button text="Till  kassan" iconRight={<IconCounter />} />
+              <CartButton />
             </div>
 
             <div className={styles.bottomSection}>

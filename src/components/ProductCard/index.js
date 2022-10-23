@@ -1,16 +1,16 @@
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 import cn from "classnames"
 import { CartContext } from "providers/CartProvider"
 import { Link } from "react-router-dom"
 import { addToCart } from "utils/cart"
 import { getCartItems } from "api/cart"
+import Skeleton from "react-loading-skeleton"
 
 import { ReactComponent as AddToCart } from "assets/add_to_cart.svg"
 import styles from "./Styles.module.scss"
 
 const ProductCard = ({ product }) => {
   const { data, setData } = useContext(CartContext)
-  // const [loading, setLoading] = useState(false)
 
   const fetchData = async () => {
     try {
@@ -68,7 +68,7 @@ const ProductCard = ({ product }) => {
         />
         <button
           className={cn(styles.cta, { [styles.loading]: data.loading })}
-          onClick={() => addItemToCart({ product: product })}
+          onClick={() => !data.loading && addItemToCart({ product: product })}
         >
           <AddToCart />
         </button>
@@ -78,3 +78,19 @@ const ProductCard = ({ product }) => {
 }
 
 export default ProductCard
+
+export const DummyCard = () => {
+  return (
+    <div className={cn(styles.block, styles.dummyBlock)}>
+      <div>
+        <div className={styles.imgLink}>
+          <Skeleton width={300} height={300} />
+        </div>
+      </div>
+      <section className={styles.info}>
+        <Skeleton width={100} />
+        <Skeleton width={250} count={3} />
+      </section>
+    </div>
+  )
+}

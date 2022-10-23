@@ -8,7 +8,6 @@
   align-items: flex-start;
   justify-content: space-between;
   flex-direction: row;
-  padding-left: 10%;
   gap: var(--padding-page);
 
   .productContainer,
@@ -17,12 +16,22 @@
     @include flex();
     align-items: stretch;
     padding: var(--padding-content);
+
+    @media screen and (max-width: 1200px) {
+      padding: var(--padding-grid);
+    }
   }
 
   .productContainer {
     border-left: solid 2.5px #eee;
     max-width: 600px;
     padding: var(--padding-content) var(--padding-page);
+
+    @media screen and (max-width: 1200px) {
+      border-left: none;
+
+      padding: var(--padding-grid) 0;
+    }
   }
 
   .breadcrumbsWrapper {
@@ -52,16 +61,32 @@
         color: var(--color-text-muted);
       }
     }
+
+    @media screen and (max-width: 1200px) {
+      padding: 0 var(--padding-grid);
+    }
   }
 
   .productAttributes,
   .addToCart,
   .productStatus {
+    text-align: left;
+    white-space: nowrap;
     border-top: solid 2.5px #eee;
     padding: calc(var(--padding-grid) * 1.5) var(--padding-content);
     @include flex;
     align-items: flex-start;
     gap: calc(var(--padding-grid) / 2);
+  }
+
+  .addToCart {
+    @media screen and (max-width: 1200px) {
+      align-items: center;
+
+      button {
+        width: 100%;
+      }
+    }
   }
 
   .productInfo {
@@ -70,14 +95,26 @@
 
   .addToCartBtn {
     svg {
+      width: 24px;
       margin-left: var(--padding-grid);
     }
+  }
+
+  .addingToCart {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 
   .productStatus {
     .status {
       color: var(--positive-color);
     }
+  }
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+    padding: var(--padding-page) var(--padding-grid);
   }
 }
 
@@ -86,4 +123,8 @@
   top: 50%;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.productContainerLoading {
+  margin-left: auto;
 }

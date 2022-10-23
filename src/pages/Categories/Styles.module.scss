@@ -42,3 +42,33 @@
     }
   }
 }
+
+.productsContainer {
+  padding-top: var(--padding-page);
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem 0.5rem;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+
+  @media screen and (min-width: 1100px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media screen and (min-width: 1400px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.descriptions {
+  max-width: 60ch;
+}
+
+.dummyTitle {
+  margin-bottom: 1.6rem;
+}
+
+.noProductsContainer {
+  padding-top: var(--padding-page);
+  margin: 0 auto;
+}

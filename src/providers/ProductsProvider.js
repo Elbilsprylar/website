@@ -99,23 +99,14 @@ export const GetProduct = ({ id }) => {
 
 // Product Categories Woocommerce
 
-const ProductsCategoriesContext = createContext()
+export const ProductsCategoriesContext = createContext()
+
 export const ProductsCategoriesProvider = ({ children }) => {
   const [data, setData] = useState({
     loading: false,
     data: null,
     error: null,
   })
-
-  return (
-    <ProductsCategoriesContext.Provider value={{ data, setData }}>
-      {children}
-    </ProductsCategoriesContext.Provider>
-  )
-}
-
-export const GetProductsCategories = () => {
-  const { data, setData } = useContext(ProductsCategoriesContext)
 
   const fetchData = async () => {
     try {
@@ -143,7 +134,11 @@ export const GetProductsCategories = () => {
     fetchData()
   }, [])
 
-  return data
+  return (
+    <ProductsCategoriesContext.Provider value={{ data, setData }}>
+      {children}
+    </ProductsCategoriesContext.Provider>
+  )
 }
 
 // Product Categories by ID Woocommerce
@@ -166,14 +161,13 @@ export const ProductsCategoriesByIDProvider = ({ children }) => {
 export const GetProductsCategoriesById = ({ id }) => {
   const { data, setData } = useContext(ProductsCategoriesByIDContext)
 
-  const fetchData = async () => {
-    // console.log("fetching . . .")
-    // console.log(
-    //   "fetching . . .222",
-    //   "products/categories" + (id ? `/${id}` : "")
-    // )
+  const fetchData = async (id) => {
+    console.log(
+      "fetching . . .222",
+      "products/categories" + (id ? `/${id}` : "")
+    )
     try {
-      const data = await api.get(`products/categories/${id}`)
+      const data = await api.get("products", { per_page: 50, category: id })
 
       setData((prevState) => ({
         ...prevState,
@@ -190,12 +184,14 @@ export const GetProductsCategoriesById = ({ id }) => {
   }
 
   useEffect(() => {
-    setData((prevState) => ({
-      ...prevState,
-      loading: true,
-    }))
-    fetchData()
-  }, [])
+    if (id) {
+      setData((prevState) => ({
+        ...prevState,
+        loading: true,
+      }))
+      fetchData(id)
+    }
+  }, [id, setData])
 
   return data
 }

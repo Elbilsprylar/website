@@ -1,5 +1,6 @@
 import React from "react"
 import Wrapper from "components/Wrapper"
+import Skeleton from "react-loading-skeleton"
 import styles from "./Styles.module.scss"
 import { GetPageCMS } from "providers/PageProvider"
 
@@ -13,7 +14,15 @@ const About = () => {
       {pageData && pageData.content ? (
         <div dangerouslySetInnerHTML={{ __html: pageData.content.rendered }} />
       ) : (
-        <p>loading . . .</p>
+        <div>
+          <Skeleton width={100} />
+          <br />
+          <Skeleton
+            width={500}
+            count={4}
+            style={{ marginTop: 10, width: "100%" }}
+          />
+        </div>
       )}
     </Wrapper>
   )

@@ -1,22 +1,66 @@
-import React from "react"
+import React, { useContext, useState } from "react"
+import cn from "classnames"
+import { CartContext } from "providers/CartProvider"
+
 import { useParams } from "react-router-dom"
 import { GetProduct } from "providers/ProductsProvider"
 import { addToCart } from "utils/cart"
+import { getCartItems } from "api/cart"
 
-import { Spinner } from "react-spinner-animated"
+import Skeleton from "react-loading-skeleton"
 import ProductOptions from "./ProductOptions/index"
 import Wrapper from "components/Wrapper"
 import Breadcrumbs from "components/Breadcrumbs"
 import Button from "components/Button"
 import Gallery from "pages/ProductView/Gallery/index"
 import styles from "./Styles.module.scss"
+import "react-loading-skeleton/dist/skeleton.css"
 
 import { ReactComponent as AddToCart } from "assets/add_to_cart.svg"
 
 const ProductsView = () => {
+  const [loading, setLoading] = useState(false)
   const { id } = useParams()
   const data = GetProduct({ id })
   const product = !data.loading && data.data ? data.data : null
+  const { setData } = useContext(CartContext)
+
+  const fetchData = async () => {
+    try {
+      const res = await getCartItems()
+      setData((prevState) => ({
+        ...prevState,
+        loading: false,
+        data: res,
+      }))
+    } catch (e) {
+      setData((prevState) => ({
+        ...prevState,
+        loading: false,
+        error: e,
+      }))
+    }
+  }
+
+  const addItemToCart = async () => {
+    setLoading(true)
+    setData((prevState) => ({
+      ...prevState,
+      loading: true,
+    }))
+    try {
+      await addToCart({ product })
+      fetchData()
+      setLoading(false)
+    } catch (e) {
+      setData((prevState) => ({
+        ...prevState,
+        loading: false,
+        error: e,
+      }))
+      console.log(e)
+    }
+  }
 
   return (
     <Wrapper additionalClass={styles.product}>
@@ -24,13 +68,16 @@ const ProductsView = () => {
         <Breadcrumbs
           links={[
             { title: "Alla produkter", link: "/alla-produkter" },
-            { title: "produkter", link: "/all-products/product" },
+            {
+              title: product && product.name ? product.name : "",
+              link: `/${product && product.slug ? product.slug : ""}`,
+            },
           ]}
         />
       </div>
       {product ? (
         <>
-          <div className={styles.ProductGallery}>
+          <div className={styles.productGallery}>
             <Gallery images={product.images} />
           </div>
           <div className={styles.productContainer}>
@@ -54,9 +101,12 @@ const ProductsView = () => {
               ))}
             <section className={styles.addToCart}>
               <Button
-                text="Lägg i varukorgen"
-                btnClass={styles.addToCartBtn}
+                text={"Lägg i varukorgen"}
+                btnClass={cn(styles.addToCartBtn, {
+                  [styles.addingToCart]: loading,
+                })}
                 iconRight={<AddToCart />}
+                onClick={() => !loading && addItemToCart()}
               />
             </section>
             <section className={styles.productStatus}>
@@ -68,13 +118,19 @@ const ProductsView = () => {
           </div>
         </>
       ) : (
-        <div className={styles.spinner}>
-          <Spinner
-            text={"Loading..."}
-            center={false}
-            width={"100px"}
-            height={"100px"}
-          />
+        <div
+          className={cn(
+            styles.productContainer,
+            styles.productContainerLoading
+          )}
+        >
+          <section className={styles.productInfo}>
+            <Skeleton width={140} style={{ marginBottom: 14 }} />
+            <br />
+            <Skeleton width={350} style={{ marginBlockEnd: 5 }} count={4} />
+            <br />
+            <Skeleton width={60} style={{ marginBottom: 14 }} />
+          </section>
         </div>
       )}
     </Wrapper>

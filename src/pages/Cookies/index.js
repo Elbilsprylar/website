@@ -1,8 +1,7 @@
 import React from "react"
 import { GetPageCMS } from "providers/PageProvider"
 import Wrapper from "components/Wrapper"
-import { Spinner } from "react-spinner-animated"
-
+import Skeleton from "react-loading-skeleton"
 import styles from "./Styles.module.scss"
 
 const Cookies = () => {
@@ -19,12 +18,13 @@ const Cookies = () => {
           dangerouslySetInnerHTML={{ __html: pageData.content.rendered }}
         />
       ) : (
-        <div className={styles.spinner}>
-          <Spinner
-            text={"Loading..."}
-            center={false}
-            width={"100px"}
-            height={"100px"}
+        <div>
+          <Skeleton width={100} />
+          <br />
+          <Skeleton
+            width={500}
+            count={4}
+            style={{ marginTop: 10, width: "100%" }}
           />
         </div>
       )}

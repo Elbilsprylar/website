@@ -143,10 +143,10 @@ const NavigationBar = () => {
               <ul>
                 <Link
                   to={`/alla-produkter`}
-                  className={{
+                  className={cn({
                     [styles.activeLink]:
                       location.pathname.includes("alla-produkter"),
-                  }}
+                  })}
                 >
                   Alla produkter
                 </Link>

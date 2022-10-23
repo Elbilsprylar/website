@@ -1,9 +1,16 @@
 @use "theme/_variables.scss" as *;
 
+.dummyBlock {
+  padding: 0.8rem 0.5rem;
+
+  .imgLink {
+    background: transparent !important;
+  }
+}
+
 .block {
   position: relative;
   margin-bottom: 1rem;
-  // overflow-x: hidden;
   @include transition;
 
   .imgLink {
@@ -63,7 +70,6 @@
     .price {
       color: var(--color-text-muted);
       font-size: 1.2rem;
-      // font-weight: bold;
     }
 
     .cta {
@@ -72,11 +78,8 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      padding: 0.5rem 0.6rem;
-      // padding-right: 1rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 2rem;
-      // border-bottom-left-radius: 0.5rem;
-      // border-top-left-radius: 0.5rem;
       @include transition;
       @include flex;
       cursor: pointer;
@@ -84,24 +87,17 @@
       font-weight: bold;
 
       svg {
-        width: 18px;
+        width: 20px;
       }
-
-      // &:hover {
-      //   right: 0rem;
-      // }
     }
   }
 
   &:hover {
     transform: translateY(-0.5rem);
-    // .cta {
-    //   right: -0.5rem;
-    // }
   }
 }
 
 .loading {
-  opacity: 0.9;
-  pointer-events: none;
+  opacity: 0.7;
+  cursor: not-allowed !important;
 }

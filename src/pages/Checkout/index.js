@@ -1,11 +1,15 @@
 import React, { useContext, useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+
 import { CartContext } from "providers/CartProvider"
 import { getCartItems } from "api/cart"
 import calcCartData from "helpers/calculateCartData"
 import { updateCartItem, deleteCartItem } from "utils/cart"
-import { Spinner } from "react-spinner-animated"
+import Skeleton from "react-loading-skeleton"
 import Wrapper from "components/Wrapper"
 
+import { ReactComponent as Delete } from "assets/delete.svg"
+import { ReactComponent as CartIcon } from "assets/cart-icon-large.svg"
 import styles from "./Styles.module.scss"
 
 const CartItem = ({ product, upgradeItem, deleteItem }) => {
@@ -26,23 +30,50 @@ const CartItem = ({ product, upgradeItem, deleteItem }) => {
 
   return (
     <div className={styles.productWrapper}>
-      <div className={styles.imageContainer}>
-        <img src={product.data.images[0].src} alt="" />
-      </div>
+      <button
+        className={styles.deleteButton}
+        onClick={() => deleteItem({ key: product.key })}
+      >
+        <Delete />
+      </button>
       <div className={styles.productInfo}>
-        <p>{product.data.name}</p>
-        <p className={styles.productPrice}>
-          {product.data.price + " " + product.currency}
-        </p>
+        <div className={styles.imageContainer}>
+          <img src={product.data.images[0].src} alt="" />
+        </div>
+        <div className={styles.productText}>
+          <p>{product.data.name}</p>
+          <p className={styles.productPrice}>
+            {product.data.price + " " + product.currency}
+          </p>
+        </div>
+      </div>
+
+      <div className={styles.productPricMobile}>
         <div className={styles.qtyPicker}>
           <button onClick={() => setQty(qty - 1)}>-</button>
           <p className={styles.qty}>{product.quantity}</p>
           <button onClick={() => setQty(qty + 1)}>+</button>
         </div>
+        <h4 className={styles.price}>
+          {product.line_total + " " + product.currency}
+        </h4>
       </div>
-      <h4 className={styles.price}>
-        {product.line_total + " " + product.currency}
-      </h4>
+    </div>
+  )
+}
+
+const DummyCartItem = ({ product, upgradeItem, deleteItem }) => {
+  return (
+    <div className={styles.productWrapper}>
+      <div className={styles.productInfo}>
+        <div className={styles.imageContainer}>
+          <Skeleton width={200} height={120} />
+        </div>
+        <div className={styles.productText}>
+          <Skeleton width={100} />
+          <Skeleton width={60} style={{ marginTop: 12 }} />
+        </div>
+      </div>
     </div>
   )
 }
@@ -152,18 +183,18 @@ const Checkout = () => {
                 />
               ))
             ) : (
-              <p>No items</p>
+              <div className={styles.noProducts}>
+                <CartIcon className={styles.cartIcon} />
+                <h3>Oops! Inga varor i varukorgen</h3>
+                <p>
+                  Lorem ipsum dolore{" "}
+                  <Link to="/alla-produkter">fortsätta handla</Link>
+                </p>
+              </div>
             )}
           </>
         ) : (
-          <div className={styles.spinner}>
-            <Spinner
-              text={"Loading..."}
-              center={false}
-              width={"100px"}
-              height={"100px"}
-            />
-          </div>
+          <DummyCartItem />
         )}
         <section className={styles.summary}>
           <p>

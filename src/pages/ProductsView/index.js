@@ -1,10 +1,7 @@
 import React from "react"
-import {
-  GetAllProducts,
-  GetProductsCategories,
-} from "providers/ProductsProvider"
-import { Spinner } from "react-spinner-animated"
-import "react-spinner-animated/dist/index.css"
+import { GetAllProducts } from "providers/ProductsProvider"
+import { DummyCard } from "components/ProductCard"
+import "react-loading-skeleton/dist/skeleton.css"
 
 import Wrapper from "components/Wrapper"
 import Breadcrumbs from "components/Breadcrumbs"
@@ -14,15 +11,12 @@ import styles from "./Styles.module.scss"
 
 const ProductsView = () => {
   const productsData = GetAllProducts()
-  const productsCategoriesData = GetProductsCategories()
 
   return (
     <Wrapper additionalClass={styles.products}>
       <div className={styles.breadcrumbsWrapper}>
         <Breadcrumbs
-          links={[
-            { title: "Alla produkter", link: "/categories/alla-produkter" },
-          ]}
+          links={[{ title: "Alla produkter", link: "/alla-produkter" }]}
         />
       </div>
       <article>
@@ -30,23 +24,25 @@ const ProductsView = () => {
         <p>50 produkter hittades</p>
       </article>
 
-      {productsData &&
-      !productsData.loading &&
-      productsData.data &&
-      productsData.data.length > 0 ? (
-        <div className={styles.productsContainer}>
-          {productsData.data.map((product, i) => (
-            <ProductCard key={i} product={product} />
-          ))}
-        </div>
+      {productsData && !productsData.loading ? (
+        <>
+          {productsData.data && productsData.data.length > 0 ? (
+            <div className={styles.productsContainer}>
+              {productsData.data.map((product, i) => (
+                <ProductCard key={i} product={product} />
+              ))}
+            </div>
+          ) : (
+            <div className={styles.noProductsContainer}>
+              <p>Inga produkter att visa . . .</p>
+            </div>
+          )}
+        </>
       ) : (
-        <div className={styles.spinner}>
-          <Spinner
-            text={"Loading..."}
-            center={false}
-            width={"100px"}
-            height={"100px"}
-          />
+        <div className={styles.productsContainer}>
+          {[...new Array(4)].map((elem) => (
+            <DummyCard />
+          ))}
         </div>
       )}
     </Wrapper>

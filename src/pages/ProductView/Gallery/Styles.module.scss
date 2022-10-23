@@ -5,11 +5,16 @@
   align-items: flex-start;
   flex-direction: row;
   gap: var(--padding-grid);
+  flex: 1 0 50%;
 
   .mainImage {
-    max-width: 550px;
-    // border: solid 2px #ddd;
+    width: 90%;
+    max-width: 600px;
     border-radius: 6px;
+
+    @media screen and (max-width: 1200px) {
+      width: 100%;
+    }
   }
 
   .imgsList {
@@ -20,7 +25,6 @@
       width: 100px;
       height: 100px;
       cursor: pointer;
-      border: solid 2px #ddd;
       border-radius: 6px;
 
       img {
@@ -29,5 +33,12 @@
         height: 100%;
       }
     }
+    @media screen and (max-width: 1200px) {
+      flex-direction: row;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column-reverse;
   }
 }

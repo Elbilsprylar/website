@@ -19,7 +19,9 @@ const Breadcrumbs = ({ links }) => {
             <Link
               to={item.link}
               className={cn({
-                [styles.active]: location.pathname === item.link,
+                [styles.active]:
+                  location.pathname === item.link ||
+                  location.pathname.includes(item.link),
               })}
             >
               {item.title}

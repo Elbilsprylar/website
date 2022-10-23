@@ -16,14 +16,7 @@
   white-space: nowrap;
 
   &:hover {
-    background: #fff;
-    color: var(--color-primary);
-
-    svg {
-      * {
-        fill: var(--color-primary);
-      }
-    }
+    filter: brightness(1.2);
   }
 
   p {

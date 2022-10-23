@@ -26,23 +26,26 @@ export const PageDataProvider = ({ children }) => {
 export const GetPageCMS = (pageId) => {
   const { data, setData } = useContext(PageDataContext)
 
-  const fetchData = useCallback(async () => {
-    try {
-      const data = await fetchPageData(pageId)
+  const fetchData = useCallback(
+    async (pageId) => {
+      try {
+        const data = await fetchPageData(pageId)
 
-      setData((prevState) => ({
-        ...prevState,
-        loading: false,
-        data: data,
-      }))
-    } catch (e) {
-      setData((prevState) => ({
-        ...prevState,
-        loading: false,
-        error: e,
-      }))
-    }
-  }, [setData])
+        setData((prevState) => ({
+          ...prevState,
+          loading: false,
+          data: data,
+        }))
+      } catch (e) {
+        setData((prevState) => ({
+          ...prevState,
+          loading: false,
+          error: e,
+        }))
+      }
+    },
+    [setData]
+  )
 
   useEffect(() => {
     if (pageId) {
@@ -50,7 +53,6 @@ export const GetPageCMS = (pageId) => {
         ...prevState,
         loading: true,
       }))
-      // console.log("asdasd", pageId)
       fetchData(pageId)
     }
   }, [pageId, setData, fetchData])

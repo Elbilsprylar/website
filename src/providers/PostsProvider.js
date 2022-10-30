@@ -1,9 +1,9 @@
 import React, { useState, createContext, useEffect } from "react"
-import { getHomeData } from "api/homedata"
+import { getPosts } from "api/homedata"
 
-export const HomeContext = createContext()
+export const PostsContext = createContext()
 
-export const HomeProvider = ({ children }) => {
+export const PostsProvider = ({ children }) => {
   const [data, setData] = useState({
     loading: true,
     data: null,
@@ -14,7 +14,7 @@ export const HomeProvider = ({ children }) => {
 
   const saveHomeData = async () => {
     try {
-      const data = await getHomeData()
+      const data = await getPosts()
       setData({
         loading: false,
         error: null,
@@ -30,8 +30,8 @@ export const HomeProvider = ({ children }) => {
   }
 
   return (
-    <HomeContext.Provider value={{ data, setData }}>
+    <PostsContext.Provider value={{ data, setData }}>
       {children}
-    </HomeContext.Provider>
+    </PostsContext.Provider>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react"
 import { useParams, Redirect } from "react-router-dom"
+import { Helmet } from "react-helmet"
 import { CategoriesContext } from "providers/CategoriesProvider"
 import { GetPageCMS } from "providers/PageProvider"
 import {
@@ -50,6 +51,7 @@ const Categories = () => {
 
   return (
     <Wrapper additionalClass={styles.categories}>
+      <Helmet title={currentCategory?.title ?? "Elbilsprylar"} />
       {currentCategory && (
         <div className={styles.breadcrumbsWrapper}>
           <Breadcrumbs

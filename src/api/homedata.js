@@ -40,3 +40,13 @@ export const getPageData = async (pageId) => {
 
   return data
 }
+
+export const getPosts = async () => {
+  const res = await fetch(
+    ` ${process.env.REACT_APP_WORDPRESS_PUBLIC_URL}/wp-json/wp/v2/posts`,
+    { method: "GET" }
+  )
+  const data = await res.json()
+
+  return data
+}

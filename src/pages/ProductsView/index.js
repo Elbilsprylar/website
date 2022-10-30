@@ -1,6 +1,7 @@
-import React from "react"
-import { GetAllProducts } from "providers/ProductsProvider"
+import React, { useContext } from "react"
+import { ProductsContext } from "providers/ProductsProvider"
 import { DummyCard } from "components/ProductCard"
+import { Helmet } from "react-helmet"
 import "react-loading-skeleton/dist/skeleton.css"
 
 import Wrapper from "components/Wrapper"
@@ -10,10 +11,11 @@ import ProductCard from "components/ProductCard"
 import styles from "./Styles.module.scss"
 
 const ProductsView = () => {
-  const productsData = GetAllProducts()
+  const { data: productsData } = useContext(ProductsContext)
 
   return (
     <Wrapper additionalClass={styles.products}>
+      <Helmet title={"Alla produkter"} />
       <div className={styles.breadcrumbsWrapper}>
         <Breadcrumbs
           links={[{ title: "Alla produkter", link: "/alla-produkter" }]}
@@ -40,7 +42,7 @@ const ProductsView = () => {
         </>
       ) : (
         <div className={styles.productsContainer}>
-          {[...new Array(4)].map((elem) => (
+          {[...new Array(4)].map(() => (
             <DummyCard />
           ))}
         </div>

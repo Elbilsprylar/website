@@ -47,11 +47,13 @@ const ProductCard = ({ product }) => {
     }
   }
 
+  console.log(product)
+
   return (
     <div className={styles.block}>
       <Link to={`/product/${product.slug}/${product.id}`}>
         <div className={styles.imgLink}>
-          <img src={product.images[0].src} alt="" />
+          <img src={product.images[0]?.src} alt="" />
         </div>
       </Link>
       <section className={styles.info}>

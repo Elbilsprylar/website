@@ -1,23 +1,14 @@
 import React, { useState, useEffect, useContext, createContext } from "react"
 import { api } from "api/woocommerce_api"
 
-const ProductsContext = createContext()
+export const ProductsContext = createContext()
+
 export const ProductsProvider = ({ children }) => {
   const [data, setData] = useState({
     loading: false,
     data: null,
     error: null,
   })
-
-  return (
-    <ProductsContext.Provider value={{ data, setData }}>
-      {children}
-    </ProductsContext.Provider>
-  )
-}
-
-export const GetAllProducts = () => {
-  const { data, setData } = useContext(ProductsContext)
 
   const fetchData = async () => {
     try {
@@ -45,7 +36,11 @@ export const GetAllProducts = () => {
     fetchData()
   }, [])
 
-  return data
+  return (
+    <ProductsContext.Provider value={{ data, setData }}>
+      {children}
+    </ProductsContext.Provider>
+  )
 }
 
 // Product context Woocommerce
@@ -162,10 +157,6 @@ export const GetProductsCategoriesById = ({ id }) => {
   const { data, setData } = useContext(ProductsCategoriesByIDContext)
 
   const fetchData = async (id) => {
-    console.log(
-      "fetching . . .222",
-      "products/categories" + (id ? `/${id}` : "")
-    )
     try {
       const data = await api.get("products", { per_page: 50, category: id })
 
@@ -195,3 +186,50 @@ export const GetProductsCategoriesById = ({ id }) => {
 
   return data
 }
+
+export const PopularProductsContext = createContext()
+export const PopularProductsProvider = ({ children }) => {
+  const [data, setData] = useState({
+    loading: false,
+    data: null,
+    error: null,
+  })
+
+  const fetchData = async () => {
+    try {
+      const data = await api.get("products", {
+        per_page: 50,
+        orderby: "popularity",
+        order: "desc",
+      })
+
+      setData((prevState) => ({
+        ...prevState,
+        loading: false,
+        data: data.data,
+      }))
+    } catch (e) {
+      setData((prevState) => ({
+        ...prevState,
+        loading: false,
+        error: e,
+      }))
+    }
+  }
+
+  useEffect(() => {
+    setData((prevState) => ({
+      ...prevState,
+      loading: true,
+    }))
+    fetchData()
+  }, [setData])
+
+  return (
+    <PopularProductsContext.Provider value={{ data, setData }}>
+      {children}
+    </PopularProductsContext.Provider>
+  )
+}
+
+// orderby=popularity&order=desc

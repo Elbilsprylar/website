@@ -4,11 +4,13 @@ import { HomeProvider } from "providers/HomeDataProvider"
 import { PageDataProvider } from "providers/PageProvider"
 import { FooterProvider } from "providers/FooterProvider"
 import { CartProvider } from "providers/CartProvider"
+import { PostsProvider } from "providers/PostsProvider"
 import {
   ProductsProvider,
   ProductProvider,
   ProductsCategoriesProvider,
   ProductsCategoriesByIDProvider,
+  PopularProductsProvider,
 } from "providers/ProductsProvider"
 
 import { Helmet } from "react-helmet"
@@ -35,57 +37,67 @@ const Routes = () => {
           <ProductsCategoriesProvider>
             <ProductsCategoriesByIDProvider>
               <ProductsProvider>
-                <ProductProvider>
-                  <FooterProvider>
-                    <CartProvider>
-                      <Router>
-                        <Helmet>
-                          <title>This the title tag</title>
-                        </Helmet>
-                        <NavigationBar />
-                        <Switch>
-                          <Route path={"/"} exact component={Home} />
-                          <Route
-                            path={"/alla-produkter"}
-                            exact
-                            component={ProductsView}
-                          />
-                          <Route
-                            path={"/product/:name/:id"}
-                            exact
-                            component={ProductView}
-                          />
-                          <Route
-                            path={"/contact-us"}
-                            exact
-                            component={Contact}
-                          />
-                          <Route
-                            path={"/categories/:route"}
-                            exact
-                            component={Categories}
-                          />
-                          <Route path={"/om-oss"} exact component={About} />
-                          <Route path={"/q-and-a"} exact component={QandA} />
-                          <Route
-                            path={"/checkout"}
-                            exact
-                            component={Checkout}
-                          />
-                          <Route path={"/cookies"} exact component={Cookies} />
-                          <Route path={"/terms"} exact component={Terms} />
-                          <Route
-                            path={"/privacy-policy"}
-                            exact
-                            component={PrivacyPolicy}
-                          />
-                          <Route path={"*"} exact component={NotFound} />
-                        </Switch>
-                        <Footer />
-                      </Router>
-                    </CartProvider>
-                  </FooterProvider>
-                </ProductProvider>
+                <PopularProductsProvider>
+                  <ProductProvider>
+                    <FooterProvider>
+                      <CartProvider>
+                        <PostsProvider>
+                          <Router>
+                            <Helmet title="Elbilsprylar.com" />
+                            <NavigationBar />
+                            <Switch>
+                              <Route path={"/"} exact component={Home} />
+                              <Route
+                                path={"/alla-produkter"}
+                                exact
+                                component={ProductsView}
+                              />
+                              <Route
+                                path={"/product/:name/:id"}
+                                exact
+                                component={ProductView}
+                              />
+                              <Route
+                                path={"/contact-us"}
+                                exact
+                                component={Contact}
+                              />
+                              <Route
+                                path={"/categories/:route"}
+                                exact
+                                component={Categories}
+                              />
+                              <Route path={"/om-oss"} exact component={About} />
+                              <Route
+                                path={"/q-and-a"}
+                                exact
+                                component={QandA}
+                              />
+                              <Route
+                                path={"/checkout"}
+                                exact
+                                component={Checkout}
+                              />
+                              <Route
+                                path={"/cookies"}
+                                exact
+                                component={Cookies}
+                              />
+                              <Route path={"/terms"} exact component={Terms} />
+                              <Route
+                                path={"/privacy-policy"}
+                                exact
+                                component={PrivacyPolicy}
+                              />
+                              <Route path={"*"} exact component={NotFound} />
+                            </Switch>
+                            <Footer />
+                          </Router>
+                        </PostsProvider>
+                      </CartProvider>
+                    </FooterProvider>
+                  </ProductProvider>
+                </PopularProductsProvider>
               </ProductsProvider>
             </ProductsCategoriesByIDProvider>
           </ProductsCategoriesProvider>

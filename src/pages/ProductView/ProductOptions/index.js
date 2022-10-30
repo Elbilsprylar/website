@@ -3,7 +3,7 @@ import cn from "classnames"
 import styles from "./Styles.module.scss"
 
 const ProductOptions = ({ attribute }) => {
-  const [state, setState] = useState("10cm")
+  const [state, setState] = useState(null)
 
   useEffect(() => {
     console.log(state)
@@ -14,7 +14,7 @@ const ProductOptions = ({ attribute }) => {
       <p>{attribute.name}</p>
       <ul className={styles.optionsList}>
         {attribute.options.map((option) => (
-          <li value={option}>
+          <li key={option} value={option}>
             <button
               className={cn({ [styles.selected]: state === option })}
               onClick={() => setState(option)}

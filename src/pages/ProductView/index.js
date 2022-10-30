@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react"
 import cn from "classnames"
 import { CartContext } from "providers/CartProvider"
+import { Helmet } from "react-helmet"
 
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { GetProduct } from "providers/ProductsProvider"
 import { addToCart } from "utils/cart"
 import { getCartItems } from "api/cart"
@@ -14,12 +15,15 @@ import Breadcrumbs from "components/Breadcrumbs"
 import Button from "components/Button"
 import Gallery from "pages/ProductView/Gallery/index"
 import styles from "./Styles.module.scss"
+import { ReactComponent as ArrowDown } from "assets/arrow-down.svg"
+
 import "react-loading-skeleton/dist/skeleton.css"
 
 import { ReactComponent as AddToCart } from "assets/add_to_cart.svg"
 
 const ProductsView = () => {
   const [loading, setLoading] = useState(false)
+  const [open, setOpen] = useState(true)
   const { id } = useParams()
   const data = GetProduct({ id })
   const product = !data.loading && data.data ? data.data : null
@@ -62,8 +66,11 @@ const ProductsView = () => {
     }
   }
 
+  console.log({ product, open })
+
   return (
     <Wrapper additionalClass={styles.product}>
+      <Helmet title={product?.name ?? "Elbilsprylar"} />
       <div className={styles.breadcrumbsWrapper}>
         <Breadcrumbs
           links={[
@@ -79,14 +86,44 @@ const ProductsView = () => {
         <>
           <div className={styles.productGallery}>
             <Gallery images={product.images} />
+            <div
+              className={styles.fullDescription}
+              onClick={() => setOpen(!open)}
+            >
+              <section className={styles.descriptionContainerHead}>
+                <h4>Product beskrivning</h4>
+                {console.log(product.categories, product.categories.length)}
+                <ArrowDown
+                  className={cn(styles.arrowDown, {
+                    [styles.arrowUp]: open,
+                  })}
+                />
+              </section>
+              <section
+                className={cn(styles.descriptionContainer, {
+                  [styles.descriptionContainerOpen]: open,
+                })}
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
+            </div>
           </div>
           <div className={styles.productContainer}>
             <section className={styles.productInfo}>
               <h1>{product.name}</h1>
+              {product.categories && product.categories.length > 0 && (
+                <section className={styles.categoriesLinks}>
+                  {product.categories.map((category) => (
+                    <Link to={`/categories/${category.slug}`}>
+                      {category.name}
+                    </Link>
+                  ))}
+                </section>
+              )}
               <div
                 className={styles.productInfoDescription}
                 dangerouslySetInnerHTML={{ __html: product.short_description }}
               />
+              {console.log(product)}
               <p className={styles.price}>{product.price} :-</p>
             </section>
             {product.attributes &&
@@ -115,6 +152,25 @@ const ProductsView = () => {
                 <strong>Beräknad leveranstid:</strong> 3-5 arbetsdagar
               </p>
             </section>
+            <div
+              className={styles.fullDescriptionMobile}
+              onClick={() => setOpen(!open)}
+            >
+              <section className={styles.descriptionContainerHead}>
+                <h4>Product beskrivning</h4>
+                <ArrowDown
+                  className={cn(styles.arrowDown, {
+                    [styles.arrowUp]: open,
+                  })}
+                />
+              </section>
+              <section
+                className={cn(styles.descriptionContainer, {
+                  [styles.descriptionContainerOpen]: open,
+                })}
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
+            </div>
           </div>
         </>
       ) : (

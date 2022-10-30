@@ -27,4 +27,29 @@
       max-width: 15ch;
     }
   }
+
+  .popProducts {
+    margin: var(--padding-page) 0;
+    h2 {
+      text-align: left;
+    }
+  }
+
+  .productsContainer {
+    padding-top: var(--padding-content);
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem 0.5rem;
+    // grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+
+    @media screen and (min-width: 1100px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media screen and (min-width: 1400px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 }

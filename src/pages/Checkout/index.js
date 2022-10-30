@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { Helmet } from "react-helmet"
 
 import { CartContext } from "providers/CartProvider"
 import { getCartItems } from "api/cart"
@@ -163,6 +164,7 @@ const Checkout = () => {
 
   return (
     <Wrapper additionalClass={styles.checkout}>
+      <Helmet title={"Kassa"} />
       <div className={styles.itemsWrapper}>
         <h1>Kassa</h1>
         {!cartItemsData.loading ? (

@@ -51,29 +51,34 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className={styles.block}>
-      <Link to={`/product/${product.slug}/${product.id}`}>
-        <div className={styles.imgLink}>
-          <img src={product.images[0]?.src} alt="" />
-        </div>
-      </Link>
-      <section className={styles.info}>
-        <p className={styles.name}>{product.name}</p>
-        {product.stock_status === "instock" && (
-          <p className={styles.productStatus}>tillgänglig</p>
-        )}
-        {product.stock_status === "outofstock" && (
-          <p className={styles.productStatus}>ej tillgänglig</p>
-        )}
-        <div
-          className={styles.price}
-          dangerouslySetInnerHTML={{ __html: product.price_html }}
-        />
+      <div className={styles.imgLink}>
         <button
           className={cn(styles.cta, { [styles.loading]: data.loading })}
           onClick={() => !data.loading && addItemToCart({ product: product })}
         >
           <AddToCart />
         </button>
+        <Link to={`/product/${product.slug}/${product.id}`}>
+          <img src={product.images[0]?.src} alt="" />
+        </Link>
+      </div>
+      <section className={styles.info}>
+        {product.stock_status === "outofstock" && (
+          <span className={styles.productStatusUnAvailable}>
+            Tillfäligt slut
+          </span>
+        )}
+        <p className={styles.name}>{product.name}</p>
+        <div
+          className={styles.price}
+          dangerouslySetInnerHTML={{ __html: product.price_html }}
+        />
+        {/* <button
+          className={cn(styles.cta, { [styles.loading]: data.loading })}
+          onClick={() => !data.loading && addItemToCart({ product: product })}
+        >
+          <AddToCart />
+        </button> */}
       </section>
     </div>
   )
@@ -84,10 +89,8 @@ export default ProductCard
 export const DummyCard = () => {
   return (
     <div className={cn(styles.block, styles.dummyBlock)}>
-      <div>
-        <div className={styles.imgLink}>
-          <Skeleton width={300} height={300} />
-        </div>
+      <div className={styles.imgLink}>
+        <Skeleton width={300} height={300} />
       </div>
       <section className={styles.info}>
         <Skeleton width={100} />

@@ -7,6 +7,13 @@ const Gallery = ({ images }) => {
     <div className={styles.galleryContainer}>
       {images.length > 0 ? (
         <>
+          <div className={styles.galleryImgContainer}>
+            <img
+              src={currentImgUrl}
+              alt={images[0].alt}
+              className={styles.mainImage}
+            />
+          </div>
           <ul className={styles.imgsList}>
             {images.map((image, i) => (
               <li
@@ -17,11 +24,6 @@ const Gallery = ({ images }) => {
               </li>
             ))}
           </ul>
-          <img
-            src={currentImgUrl}
-            alt={images[0].alt}
-            className={styles.mainImage}
-          />
         </>
       ) : null}
     </div>

@@ -4,6 +4,7 @@
   @include flex;
   gap: 1rem;
   flex: 1 0 50%;
+  margin-bottom: var(--padding-content);
 
   .galleryImgContainer {
     @include flex;

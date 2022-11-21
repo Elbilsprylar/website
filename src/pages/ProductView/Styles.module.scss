@@ -165,8 +165,21 @@
       justify-content: flex-start;
       @include transition;
       z-index: 1;
+
       p {
         color: var(--color-text-muted);
+        text-align: left;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        margin: 0.8rem 0rem 0.2rem 0rem;
+      }
+
+      * {
         text-align: left;
       }
     }
@@ -178,8 +191,6 @@
   }
 
   .fullDescription {
-    margin-top: var(--padding-content);
-
     @media screen and (max-width: 1000px) {
       display: none;
     }

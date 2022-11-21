@@ -1,7 +1,8 @@
-import React, { useContext } from "react"
+import React from "react"
 import { GetFooterData } from "providers/FooterProvider"
 import styles from "./Styles.module.scss"
-import { CategoriesContext } from "providers/CategoriesProvider"
+// import { CategoriesContext } from "providers/CategoriesProvider"
+import { GetCategoriesCMS } from "providers/CategoriesProvider"
 import { Link } from "react-router-dom"
 
 import { ReactComponent as Logo } from "assets/logoFooter.svg"
@@ -16,6 +17,15 @@ import { ReactComponent as FooterBg } from "assets/footerBg.svg"
 
 const Footer = () => {
   // const list = useContext(CategoriesContext)
+  const headerCategories = GetCategoriesCMS()
+  const list =
+    headerCategories &&
+    !headerCategories.loading &&
+    headerCategories.data &&
+    headerCategories.data.headerMenuItems &&
+    headerCategories.data.headerMenuItems.length > 0
+      ? headerCategories.data.headerMenuItems
+      : []
   const data = GetFooterData()
   const infoLinks =
     data && !data.loading && data.data && data.data.footerMenuItems.length > 0
@@ -82,11 +92,12 @@ const Footer = () => {
       <section>
         <h3>Kategorier</h3>
         <ul className={styles.categoriesLinks}>
-          {/* {list.map((route) => (
-            <li>
-              <Link to={route.path}>{route.title}</Link>
-            </li>
-          ))} */}
+          {list.length > 0 &&
+            list.map((route) => (
+              <li>
+                <Link to={route.path}>{route.title}</Link>
+              </li>
+            ))}
         </ul>
       </section>
       <Link to="/" className={styles.logo}>

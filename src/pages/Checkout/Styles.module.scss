@@ -1,7 +1,7 @@
 @use "theme/_variables.scss" as *;
 
 .checkout {
-  padding: var(--padding-content) var(--padding-grid);
+  padding: var(--padding-content) var(--padding-grid) 0;
 
   .itemsWrapper {
     position: relative;
@@ -50,7 +50,7 @@
   }
 
   @media screen and (min-width: 1000px) {
-    padding: 0 0rem 0rem 5rem;
+    padding: 0rem 1rem 0rem 5rem;
     position: relative;
     @include flex;
     flex-direction: row;
@@ -59,17 +59,31 @@
     color: #222;
 
     .itemsWrapper,
-    .paymentWrapper {
+    .checkoutFormContainer {
       padding: 1rem;
-    }
-
-    .paymentWrapper {
-      width: 40%;
-      background: #fff;
     }
 
     .itemsWrapper {
       width: 60%;
+    }
+  }
+
+  .checkoutFormContainer {
+    @include flex;
+    align-items: stretch;
+    padding: var(--padding-content);
+    width: 40%;
+    background: #fff;
+
+    h1 {
+      align-self: flex-start;
+      margin-bottom: var(--padding-content);
+    }
+
+    @media screen and (max-width: 1000px) {
+      margin-top: var(--padding-content);
+      padding: var(--padding-content) var(--padding-grid);
+      width: 100%;
     }
   }
 }
@@ -234,7 +248,7 @@
   .deleteButton {
     position: absolute;
     top: var(--padding-content);
-    right: var(--padding-content);
+    right: var(--padding-grid);
     border: none;
     background: transparent;
     cursor: pointer;
@@ -270,6 +284,10 @@
     p {
       line-height: 1.8;
       max-width: 26ch;
+
+      @media screen and (max-width: 800px) {
+        max-width: 16ch;
+      }
     }
 
     .productPrice {

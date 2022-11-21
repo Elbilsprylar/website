@@ -8,6 +8,7 @@ import calcCartData from "helpers/calculateCartData"
 import { updateCartItem, deleteCartItem } from "utils/cart"
 import Skeleton from "react-loading-skeleton"
 import Wrapper from "components/Wrapper"
+import CheckoutForm from "components/CheckoutForm"
 
 import { ReactComponent as Delete } from "assets/delete.svg"
 import { ReactComponent as CartIcon } from "assets/cart-icon-large.svg"
@@ -215,7 +216,10 @@ const Checkout = () => {
           </p>
         </section>
       </div>
-      <div className={styles.paymentWrapper}>zsdsd</div>
+      <div className={styles.checkoutFormContainer}>
+        {/* <h1>Kassa</h1> */}
+        <CheckoutForm />
+      </div>
     </Wrapper>
   )
 }

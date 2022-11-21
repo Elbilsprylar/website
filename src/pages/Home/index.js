@@ -15,20 +15,25 @@ const Home = () => {
     data && !data.loading && data.data && data.data.heroSection
       ? data.data.heroSection
       : {}
+  const heroImg =
+    homeHeroData && homeHeroData.heroImgURL && homeHeroData.heroImgURL
 
-  console.log("posts_data", posts_data)
+  // console.log("posts_data", posts_data)
 
   return (
     <Wrapper additionalClass={styles.home}>
-      <div className={styles.homeHero}>
+      <div
+        className={styles.homeHero}
+        style={{
+          backgroundImage: `url(${heroImg})`,
+        }}
+      >
         <blockquote>
-          {homeHeroData && homeHeroData.heroTitle
-            ? homeHeroData.heroTitle
-            : "För en enklare elbilism och ett hållbart sverige"}
+          {homeHeroData && homeHeroData.heroTitle && homeHeroData.heroTitle}
         </blockquote>
       </div>
       <div className={styles.popProducts}>
-        <h2>Populära produkter</h2>
+        <h2>Populärt just nu</h2>
         {productsData && !productsData.loading ? (
           <>
             {productsData.data && productsData.data.length > 0 ? (

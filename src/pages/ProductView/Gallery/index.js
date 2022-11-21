@@ -2,7 +2,9 @@ import React, { useState } from "react"
 import styles from "./Styles.module.scss"
 
 const Gallery = ({ images }) => {
-  const [currentImgUrl, setCurrentImgUrl] = useState(images[0].src)
+  const [currentImgUrl, setCurrentImgUrl] = useState(
+    images.length > 0 ? images[0].src : null
+  )
   return (
     <div className={styles.galleryContainer}>
       {images.length > 0 ? (

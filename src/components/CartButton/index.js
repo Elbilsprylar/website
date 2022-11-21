@@ -29,6 +29,7 @@ export const CartButton = () => {
   }
   return (
     <Button
+      btnClass={styles.cartBtn}
       text="Till  kassan"
       iconRight={<IconCounter />}
       onClick={() => history.push("/checkout")}

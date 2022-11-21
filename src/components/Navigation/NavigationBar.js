@@ -117,7 +117,7 @@ const NavigationBar = () => {
           </div>
           <div className={cn(styles.upperBar__item, styles.storeTxt)}>
             <StoreIcon />
-            <p>Nordens största utbud för alla elbilar och hybrider</p>
+            <p>Störst i norden på laddkablar</p>
           </div>
         </div>
         {windowSize.innerWidth > 1000 ? (

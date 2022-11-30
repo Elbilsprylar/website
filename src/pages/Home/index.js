@@ -18,8 +18,6 @@ const Home = () => {
   const heroImg =
     homeHeroData && homeHeroData.heroImgURL && homeHeroData.heroImgURL
 
-  // console.log("posts_data", posts_data)
-
   return (
     <Wrapper additionalClass={styles.home}>
       <div

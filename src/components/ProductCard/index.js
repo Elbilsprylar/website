@@ -29,13 +29,13 @@ const ProductCard = ({ product }) => {
     }
   }
 
-  const addItemToCart = async ({ product }) => {
+  const addItemToCart = async ({ productID }) => {
     setData((prevState) => ({
       ...prevState,
       loading: true,
     }))
     try {
-      await addToCart({ product })
+      await addToCart({ productID })
       fetchData()
     } catch (e) {
       setData((prevState) => ({
@@ -52,7 +52,9 @@ const ProductCard = ({ product }) => {
       <div className={styles.imgLink}>
         <button
           className={cn(styles.cta, { [styles.loading]: data.loading })}
-          onClick={() => !data.loading && addItemToCart({ product: product })}
+          onClick={() =>
+            !data.loading && addItemToCart({ productID: product.id ?? 0 })
+          }
         >
           <AddToCart />
         </button>

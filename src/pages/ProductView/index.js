@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import cn from "classnames"
 import { CartContext } from "providers/CartProvider"
 import { Helmet } from "react-helmet"
@@ -28,6 +28,13 @@ const ProductsView = () => {
   const data = GetProduct({ id })
   const product = !data.loading && data.data ? data.data : null
   const { setData } = useContext(CartContext)
+  const [currentProdctID, setCurrentProdctID] = useState(null)
+
+  useEffect(() => {
+    if (product && product.variations.length === 0) {
+      setCurrentProdctID(product.id)
+    }
+  }, [product])
 
   const fetchData = async () => {
     try {
@@ -53,7 +60,7 @@ const ProductsView = () => {
       loading: true,
     }))
     try {
-      await addToCart({ product })
+      await addToCart({ productID: currentProdctID })
       fetchData()
       setLoading(false)
     } catch (e) {
@@ -66,21 +73,24 @@ const ProductsView = () => {
     }
   }
 
-  console.log({ product, open })
-
   return (
     <Wrapper additionalClass={styles.product}>
       <Helmet title={product?.name ?? "Elbilsprylar"} />
       <div className={styles.breadcrumbsWrapper}>
-        <Breadcrumbs
-          links={[
-            { title: "Alla produkter", link: "/alla-produkter" },
-            {
-              title: product && product.name ? product.name : "",
-              link: `/${product && product.slug ? product.slug : ""}`,
-            },
-          ]}
-        />
+        {product && product.categories && product.categories.length > 0 && (
+          <Breadcrumbs
+            links={[
+              {
+                title: product.categories[0]?.name,
+                link: `/categories/${product.categories[0]?.slug}`,
+              },
+              {
+                title: product && product.name ? product.name : "",
+                link: `/${product && product.slug ? product.slug : ""}`,
+              },
+            ]}
+          />
+        )}
       </div>
       {product ? (
         <>
@@ -92,7 +102,6 @@ const ProductsView = () => {
             >
               <section className={styles.descriptionContainerHead}>
                 <h4>Product beskrivning</h4>
-                {console.log(product.categories, product.categories.length)}
                 <ArrowDown
                   className={cn(styles.arrowDown, {
                     [styles.arrowUp]: open,
@@ -123,24 +132,29 @@ const ProductsView = () => {
                 className={styles.productInfoDescription}
                 dangerouslySetInnerHTML={{ __html: product.short_description }}
               />
-              {console.log(product)}
               <p className={styles.price}>{product.price} :-</p>
             </section>
             {product.attributes &&
+              product.variations &&
               product.attributes.length > 0 &&
+              product.variations.length > 0 &&
               product.attributes.map((attribute) => (
                 <section
                   key={attribute.name}
                   className={styles.productAttributes}
                 >
-                  <ProductOptions attribute={attribute} />
+                  <ProductOptions
+                    attribute={attribute}
+                    variations={product.variations}
+                    onChange={(id) => setCurrentProdctID(id)}
+                  />
                 </section>
               ))}
             <section className={styles.addToCart}>
               <Button
                 text={"Lägg i varukorgen"}
                 btnClass={cn(styles.addToCartBtn, {
-                  [styles.addingToCart]: loading,
+                  [styles.addingToCart]: loading || !currentProdctID,
                 })}
                 iconRight={<AddToCart />}
                 onClick={() => !loading && addItemToCart()}

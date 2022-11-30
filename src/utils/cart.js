@@ -1,7 +1,7 @@
 import { storeSession, getSession } from "./session"
 
-export const addToCart = async ({ product }) => {
-  const prodId = product.id ?? 0
+export const addToCart = async ({ productID }) => {
+  const prodId = productID ?? 0
   const session = getSession() ?? null
   const dataToSend = {
     product_id: prodId,

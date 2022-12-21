@@ -3,6 +3,7 @@ import { HomeContext } from "providers/HomeDataProvider"
 import { PopularProductsContext } from "providers/ProductsProvider"
 import { PostsContext } from "providers/PostsProvider"
 
+// import TrustBox from "components/Trustpilot"
 import Wrapper from "components/Wrapper"
 import ProductCard, { DummyCard } from "components/ProductCard"
 import styles from "./Styles.module.scss"
@@ -30,6 +31,7 @@ const Home = () => {
           {homeHeroData && homeHeroData.heroTitle && homeHeroData.heroTitle}
         </blockquote>
       </div>
+      {/* <TrustBox /> */}
       <div className={styles.popProducts}>
         <h2>Populärt just nu</h2>
         {productsData && !productsData.loading ? (

@@ -119,7 +119,7 @@ const ProductsView = () => {
           <div className={styles.productContainer}>
             <section className={styles.productInfo}>
               <h1>{product.name}</h1>
-              {product.categories && product.categories.length > 0 && (
+              {/* {product.categories && product.categories.length > 0 && (
                 <section className={styles.categoriesLinks}>
                   {product.categories.map((category) => (
                     <Link to={`/categories/${category.slug}`}>
@@ -127,7 +127,7 @@ const ProductsView = () => {
                     </Link>
                   ))}
                 </section>
-              )}
+              )} */}
               <div
                 className={styles.productInfoDescription}
                 dangerouslySetInnerHTML={{ __html: product.short_description }}

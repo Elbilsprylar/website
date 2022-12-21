@@ -21,16 +21,21 @@ export const CartButton = () => {
   const history = useHistory()
   const IconCounter = () => {
     return (
-      <div className={styles.cartCounter}>
-        <CartIcon />
-        <p>{cartInfo && cartInfo.totalCount ? cartInfo.totalCount : 0}</p>
-      </div>
+      <>
+        <p>Till kassan</p>
+        <div className={styles.cartCounter}>
+          <CartIcon />
+          <span>
+            {cartInfo && cartInfo.totalCount ? cartInfo.totalCount : 0}
+          </span>
+        </div>
+      </>
     )
   }
   return (
     <Button
       btnClass={styles.cartBtn}
-      text="Till  kassan"
+      // text="Till  kassan"
       iconRight={<IconCounter />}
       onClick={() => history.push("/checkout")}
     />

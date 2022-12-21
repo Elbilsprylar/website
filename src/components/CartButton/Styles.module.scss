@@ -1,12 +1,28 @@
 .cartBtn {
   padding: 0.8rem 4rem;
+  background: #fff1;
+
+  p {
+    @media screen and (max-width: 650px) {
+      display: none;
+    }
+  }
+
+  &:hover {
+    background: #fff2;
+  }
+
+  @media screen and (max-width: 650px) {
+    padding: 0.4rem;
+    background: transparent;
+  }
 }
 
 .cartCounter {
   position: relative;
   margin-left: var(--padding-grid);
 
-  p {
+  span {
     background: var(--color-alert);
     padding: 4px 6px;
     font-size: var(--font-small);
@@ -19,5 +35,10 @@
     @media screen and (max-width: 1000px) {
       padding: 1px 6px;
     }
+  }
+
+  @media screen and (max-width: 650px) {
+    padding: 0.2rem;
+    margin-left: 0;
   }
 }

@@ -29,9 +29,6 @@ export const getFooterLinks = async () => {
 }
 
 export const getPageData = async (pageId) => {
-  console.log(
-    `${process.env.REACT_APP_WORDPRESS_PUBLIC_URL}/wp-json/wp/v2/pages/${pageId}`
-  )
   const res = await fetch(
     `${process.env.REACT_APP_WORDPRESS_PUBLIC_URL}/wp-json/wp/v2/pages/${pageId}`,
     { method: "GET" }

@@ -7,7 +7,6 @@ import styles from "./Styles.module.scss"
 
 import { CartButton } from "components/CartButton"
 import { ReactComponent as CartIcon } from "assets/cart-icon.svg"
-import { ReactComponent as StoreIcon } from "assets/store.svg"
 import { ReactComponent as TelIcon } from "assets/tel.svg"
 import { ReactComponent as ArrowDown } from "assets/arrow-down.svg"
 import { ReactComponent as Logo } from "assets/logo.svg"
@@ -116,7 +115,6 @@ const NavigationBar = () => {
             </div>
           </div>
           <div className={cn(styles.upperBar__item, styles.storeTxt)}>
-            <StoreIcon />
             <p>Störst i norden på laddkablar</p>
           </div>
         </div>
@@ -181,7 +179,7 @@ const NavigationBar = () => {
                 <Logo />
               </Link>
 
-              <IconCounter />
+              <CartButton />
             </div>
           </div>
         )}
@@ -237,11 +235,14 @@ const NavigationBar = () => {
               [styles.mobileNavCategoriesShown]: mobileCategoriesShow,
             })}
           >
-            {/* {list.map((route) => (
-              <Link to={route.path} onClick={() => setMobileMenuShown(false)}>
+            {list.map((route) => (
+              <Link
+                to={`/categories/${route.pageSlug}`}
+                onClick={() => setMobileMenuShown(false)}
+              >
                 {route.title}
               </Link>
-            ))} */}
+            ))}
           </div>
           {mobileNavItems.map((item) => (
             <Link

@@ -94,8 +94,8 @@ const Footer = () => {
         <ul className={styles.categoriesLinks}>
           {list.length > 0 &&
             list.map((route) => (
-              <li>
-                <Link to={route.path}>{route.title}</Link>
+              <li key={route.title}>
+                <Link to={`/categories/${route.pageSlug}`}>{route.title}</Link>
               </li>
             ))}
         </ul>

@@ -7,7 +7,6 @@ import styles from "./Styles.module.scss"
 const Cookies = () => {
   const data = GetPageCMS(193)
   const pageData = data && !data.loading && data.data && data.data
-  console.log(pageData)
 
   return (
     <Wrapper additionalClass={styles.wrapper}>

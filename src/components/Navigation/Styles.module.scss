@@ -139,7 +139,8 @@ nav {
     border-radius: 2rem;
     min-width: 280px;
     min-width: 45%;
-    padding: 0 var(--padding-content);
+    padding-right: 0.6rem;
+    padding-left: var(--padding-content);
     @include flex;
     flex-direction: row;
     justify-content: space-between;
@@ -150,6 +151,25 @@ nav {
       padding: var(--padding-grid) 0;
       font-size: 0.9rem;
       width: 85%;
+    }
+
+    .searchBtn {
+      background: var(--color-primary);
+      border: none;
+      border-radius: 2rem;
+      padding: 0.5rem 0.6rem;
+      cursor: pointer;
+      @include transition;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      svg {
+        * {
+          fill: #fff;
+        }
+      }
     }
 
     @media screen and (min-width: 1200px) {
@@ -362,3 +382,54 @@ nav {
     left: 0;
   }
 }
+
+// .searchContainer {
+//   position: relative;
+
+//   .searchResultsList {
+//     top: 100%;
+//     width: 90%;
+//     background: #fff;
+//     position: absolute;
+//     @include flex();
+//     z-index: 1000;
+//     transform: translateX(50%, -50%);
+//     border-bottom-right-radius: 0.5rem;
+//     border-bottom-left-radius: 0.5rem;
+//     box-shadow: 0px 4px 20px #2222;
+
+//     .item {
+//       width: 100%;
+//       height: 62px;
+//       padding: 0 2rem;
+//       font-size: 15px;
+
+//       &:not(:last-child) {
+//         border-bottom: solid #f2f2f2 2px;
+//       }
+
+//       img {
+//         max-height: 100%;
+//         width: 46px;
+//         margin-right: 1rem;
+//       }
+
+//       a {
+//         width: 100%;
+//         height: 100%;
+//         @include flex();
+//         flex-direction: row;
+//       }
+
+//       .price {
+//         margin-left: auto;
+//         color: var(--color-primary);
+//         font-weight: bold;
+//       }
+
+//       .name {
+//         color: #666;
+//       }
+//     }
+//   }
+// }

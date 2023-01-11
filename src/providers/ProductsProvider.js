@@ -232,4 +232,49 @@ export const PopularProductsProvider = ({ children }) => {
   )
 }
 
-// orderby=popularity&order=desc
+// Products search
+
+export const SearchProductsContext = createContext()
+
+export const SearchProductsProvider = ({ children }) => {
+  const [data, setData] = useState({
+    loading: false,
+    data: null,
+    error: null,
+  })
+  const [searchStr, setSearchStr] = useState("")
+
+  const fetchData = async () => {
+    try {
+      const data = await api.get("products", { per_page: 6, search: searchStr })
+
+      setData((prevState) => ({
+        ...prevState,
+        loading: false,
+        data: data.data,
+      }))
+    } catch (e) {
+      setData((prevState) => ({
+        ...prevState,
+        loading: false,
+        error: e,
+      }))
+    }
+  }
+
+  useEffect(() => {
+    setData((prevState) => ({
+      ...prevState,
+      loading: true,
+    }))
+    fetchData(searchStr)
+  }, [searchStr])
+
+  return (
+    <SearchProductsContext.Provider
+      value={{ data, setData, searchStr, setSearchStr }}
+    >
+      {children}
+    </SearchProductsContext.Provider>
+  )
+}

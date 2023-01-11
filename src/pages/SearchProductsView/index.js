@@ -1,5 +1,5 @@
-import React, { useContext } from "react"
-import { ProductsContext } from "providers/ProductsProvider"
+import React, { useContext, useEffect } from "react"
+import { SearchProductsContext } from "providers/ProductsProvider"
 import { DummyCard } from "components/ProductCard"
 import { Helmet } from "react-helmet"
 import "react-loading-skeleton/dist/skeleton.css"
@@ -10,8 +10,8 @@ import ProductCard from "components/ProductCard"
 
 import styles from "./Styles.module.scss"
 
-const ProductsView = () => {
-  const { data: productsData } = useContext(ProductsContext)
+const SearchProductsView = () => {
+  const { data: productsData } = useContext(SearchProductsContext)
 
   return (
     <Wrapper additionalClass={styles.products}>
@@ -22,7 +22,7 @@ const ProductsView = () => {
         />
       </div>
       <article>
-        <h1>Alla produkter</h1>
+        <h1>Sök resultar produkter</h1>
       </article>
 
       {productsData && !productsData.loading ? (
@@ -35,7 +35,7 @@ const ProductsView = () => {
             </div>
           ) : (
             <div className={styles.noProductsContainer}>
-              <p>Inga produkter att visa . . .</p>
+              <p>Inga produkter hittades . . .</p>
             </div>
           )}
         </>
@@ -43,7 +43,6 @@ const ProductsView = () => {
         <div className={styles.productsContainer}>
           {["prod0", "prod1", "prod2", "prod3"].map((prod, i) => (
             <>
-              {console.log(`${prod}-${i}`)}
               <DummyCard key={`${prod}-${i}`} />
             </>
           ))}
@@ -53,4 +52,4 @@ const ProductsView = () => {
   )
 }
 
-export default ProductsView
+export default SearchProductsView

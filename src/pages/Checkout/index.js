@@ -9,6 +9,7 @@ import { updateCartItem, deleteCartItem } from "utils/cart"
 import Skeleton from "react-loading-skeleton"
 import Wrapper from "components/Wrapper"
 import CheckoutForm from "components/CheckoutForm"
+import KlarnaView from "components/KlarnaView"
 
 import { ReactComponent as Delete } from "assets/delete.svg"
 import { ReactComponent as CartIcon } from "assets/cart-icon-large.svg"
@@ -85,52 +86,6 @@ const Checkout = () => {
   const { data: cartItemsData, setData } = useContext(CartContext)
   const [cartInfo, setCartInfo] = useState({ totalAmount: 0, totalCount: 0 })
   const shipping = 0
-
-  // console.log("-asd", cartItemsData)
-
-  // useEffect(() => {
-  //   async function fetchHtml() {
-  //     const products = cartItemsData.data.map((p) => {
-  //       return { id: p.product_id, amount: p.quantity }
-  //     })
-
-  //     console.log(products)
-
-  //     const res = await fetch(
-  //       "https://elbilsprylar.wpcomstaging.com/klarna/createOrder",
-  //       {
-  //         method: "POST",
-  //         mode: "cors",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           // "Access-Control-Allow-Credentials": "true",
-  //           "Access-Control-Allow-Origin": "*",
-  //         },
-  //         credentials: "same-origin",
-  //         body: JSON.stringify(products),
-  //       }
-  //     )
-
-  //     const data = await res.json()
-  //     // setCoHtml(await htmlSnippet.data)
-  //     console.log(await data)
-  //   }
-
-  //   if (cartItemsData.data && cartItemsData.data.length > 0) {
-  //     fetchHtml()
-  //   }
-  // }, [cartItemsData])
-
-  // async function fetchHtml() {
-  //   const products = cart.products.map((p) => {
-  //     return { id: p.id, amount: p.amount };
-  //   });
-  //   console.log(products);
-  //   const htmlSnippet = await axios.post("/api/klarna/createOrder", {
-  //     products,
-  //   });
-  //   setCoHtml(await htmlSnippet.data);
-  // }
 
   useEffect(() => {
     if (!cartItemsData.loading && cartItemsData.data) {
@@ -264,8 +219,12 @@ const Checkout = () => {
         </section>
       </div>
       <div className={styles.checkoutFormContainer}>
-        {/* <h1>Kassa</h1> */}
-        <CheckoutForm />
+        <h1>Kassa</h1>
+        {!cartItemsData.loading ? (
+          <KlarnaView items={cartItemsData.data} />
+        ) : (
+          <p>loading . . .</p>
+        )}
       </div>
     </Wrapper>
   )

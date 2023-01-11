@@ -3,6 +3,7 @@ import cn from "classnames"
 import { Link, useLocation } from "react-router-dom"
 import { GetCategoriesCMS } from "providers/CategoriesProvider"
 import { useScrollPosition } from "hooks/useScrollPosition"
+import ProductsSearch from "./ProductsSearchComponent"
 import styles from "./Styles.module.scss"
 
 import { CartButton } from "components/CartButton"
@@ -10,7 +11,6 @@ import { ReactComponent as CartIcon } from "assets/cart-icon.svg"
 import { ReactComponent as TelIcon } from "assets/tel.svg"
 import { ReactComponent as ArrowDown } from "assets/arrow-down.svg"
 import { ReactComponent as Logo } from "assets/logo.svg"
-import { ReactComponent as SearchIcon } from "assets/search.svg"
 import { ReactComponent as MenuIcon } from "assets/menu.svg"
 import { ReactComponent as CloseIcon } from "assets/close.svg"
 
@@ -25,7 +25,6 @@ const NavigationBar = () => {
     headerCategories.data.headerMenuItems.length > 0
       ? headerCategories.data.headerMenuItems
       : []
-  const [searchValue, setSearchValue] = useState("")
   const [telMenuOpen, setTelMenuOpen] = useState(false)
   const [mobileMenuShown, setMobileMenuShown] = useState(false)
   const [mobileCategoriesShow, setMobileCategoriesShow] = useState(false)
@@ -56,15 +55,6 @@ const NavigationBar = () => {
       window.removeEventListener("resize", handleWindowResize)
     }
   }, [])
-
-  const IconCounter = () => {
-    return (
-      <div className={styles.cartCounter}>
-        <CartIcon />
-        <p>2</p>
-      </div>
-    )
-  }
 
   return (
     <>
@@ -124,16 +114,7 @@ const NavigationBar = () => {
               <Link to="/">
                 <Logo />
               </Link>
-              <div className={styles.searchContainer}>
-                <input
-                  type="text"
-                  name="search"
-                  value={searchValue}
-                  onChange={(e) => setSearchValue(e.target.value)}
-                  placeholder="Sök produkt"
-                />
-                <SearchIcon />
-              </div>
+              <ProductsSearch />
               <CartButton />
             </div>
 
@@ -204,16 +185,7 @@ const NavigationBar = () => {
         </header>
         <div className={styles.MenuHeader}>
           <div className={styles.bottomSectionSearch}>
-            <div className={styles.searchContainer}>
-              <input
-                type="text"
-                name="search"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-                placeholder="Sök produkt"
-              />
-              <SearchIcon />
-            </div>
+            <ProductsSearch />
           </div>
         </div>
         <aside className={styles.mobileNavMenu}>
@@ -237,6 +209,7 @@ const NavigationBar = () => {
           >
             {list.map((route) => (
               <Link
+                key={route.title}
                 to={`/categories/${route.pageSlug}`}
                 onClick={() => setMobileMenuShown(false)}
               >

@@ -11,6 +11,7 @@ import {
   ProductsCategoriesProvider,
   ProductsCategoriesByIDProvider,
   PopularProductsProvider,
+  SearchProductsProvider,
 } from "providers/ProductsProvider"
 
 import { Helmet } from "react-helmet"
@@ -19,6 +20,7 @@ import Footer from "components/Footer"
 import Home from "pages/Home"
 import About from "pages/About"
 import ProductsView from "pages/ProductsView"
+import SearchProductsView from "pages/SearchProductsView"
 import ProductView from "pages/ProductView"
 import Contact from "pages/Contact"
 import Cookies from "pages/Cookies"
@@ -38,65 +40,80 @@ const Routes = () => {
             <ProductsCategoriesByIDProvider>
               <ProductsProvider>
                 <PopularProductsProvider>
-                  <ProductProvider>
-                    <FooterProvider>
-                      <CartProvider>
-                        <PostsProvider>
-                          <Router>
-                            <Helmet title="Elbilsprylar.com" />
-                            <NavigationBar />
-                            <Switch>
-                              <Route path={"/"} exact component={Home} />
-                              <Route
-                                path={"/alla-produkter"}
-                                exact
-                                component={ProductsView}
-                              />
-                              <Route
-                                path={"/product/:name/:id"}
-                                exact
-                                component={ProductView}
-                              />
-                              <Route
-                                path={"/contact-us"}
-                                exact
-                                component={Contact}
-                              />
-                              <Route
-                                path={"/categories/:route"}
-                                exact
-                                component={Categories}
-                              />
-                              <Route path={"/om-oss"} exact component={About} />
-                              <Route
-                                path={"/q-and-a"}
-                                exact
-                                component={QandA}
-                              />
-                              <Route
-                                path={"/checkout"}
-                                exact
-                                component={Checkout}
-                              />
-                              <Route
-                                path={"/cookies"}
-                                exact
-                                component={Cookies}
-                              />
-                              <Route path={"/terms"} exact component={Terms} />
-                              <Route
-                                path={"/privacy-policy"}
-                                exact
-                                component={PrivacyPolicy}
-                              />
-                              <Route path={"*"} exact component={NotFound} />
-                            </Switch>
-                            <Footer />
-                          </Router>
-                        </PostsProvider>
-                      </CartProvider>
-                    </FooterProvider>
-                  </ProductProvider>
+                  <SearchProductsProvider>
+                    <ProductProvider>
+                      <FooterProvider>
+                        <CartProvider>
+                          <PostsProvider>
+                            <Router>
+                              <Helmet title="Elbilsprylar.com" />
+                              <NavigationBar />
+                              <Switch>
+                                <Route path={"/"} exact component={Home} />
+                                <Route
+                                  path={"/alla-produkter"}
+                                  exact
+                                  component={ProductsView}
+                                />
+                                <Route
+                                  path={"/sök-produkter"}
+                                  exact
+                                  component={SearchProductsView}
+                                />
+                                <Route
+                                  path={"/product/:name/:id"}
+                                  exact
+                                  component={ProductView}
+                                />
+                                <Route
+                                  path={"/contact-us"}
+                                  exact
+                                  component={Contact}
+                                />
+                                <Route
+                                  path={"/categories/:route"}
+                                  exact
+                                  component={Categories}
+                                />
+                                <Route
+                                  path={"/om-oss"}
+                                  exact
+                                  component={About}
+                                />
+                                <Route
+                                  path={"/q-and-a"}
+                                  exact
+                                  component={QandA}
+                                />
+                                <Route
+                                  path={"/checkout"}
+                                  exact
+                                  component={Checkout}
+                                />
+                                <Route
+                                  path={"/cookies"}
+                                  exact
+                                  component={Cookies}
+                                />
+                                <Route
+                                  path={"/terms"}
+                                  exact
+                                  component={Terms}
+                                />
+                                <Route
+                                  path={"/privacy-policy"}
+                                  exact
+                                  component={PrivacyPolicy}
+                                />
+                                <Route path={"*"} exact component={NotFound} />
+                              </Switch>
+                              <Footer />
+                            </Router>
+                          </PostsProvider>
+                        </CartProvider>
+                      </FooterProvider>
+                    </ProductProvider>
+                  </SearchProductsProvider>
                 </PopularProductsProvider>
               </ProductsProvider>
             </ProductsCategoriesByIDProvider>

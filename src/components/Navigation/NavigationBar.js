@@ -185,7 +185,7 @@ const NavigationBar = () => {
         </header>
         <div className={styles.MenuHeader}>
           <div className={styles.bottomSectionSearch}>
-            <ProductsSearch />
+            <ProductsSearch closeMenu={() => setMobileMenuShown(false)} />
           </div>
         </div>
         <aside className={styles.mobileNavMenu}>

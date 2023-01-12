@@ -4,15 +4,23 @@ import { api } from "api/woocommerce_api"
 export const ProductsContext = createContext()
 
 export const ProductsProvider = ({ children }) => {
+  const [filter, setFilter] = useState(null)
+  const [maxPrice, setMaxPrice] = useState(20000)
   const [data, setData] = useState({
     loading: false,
     data: null,
     error: null,
   })
 
+  useEffect(() => console.log({ filter }), [filter])
+
   const fetchData = async () => {
     try {
-      const data = await api.get("products", { per_page: 50 })
+      const data = await api.get("products", {
+        per_page: 50,
+        ...(filter && filter),
+        ...(maxPrice > 0 && { min_price: "0", max_price: maxPrice }),
+      })
 
       setData((prevState) => ({
         ...prevState,
@@ -33,11 +41,18 @@ export const ProductsProvider = ({ children }) => {
       ...prevState,
       loading: true,
     }))
+    console.log({
+      per_page: 50,
+      ...(filter && filter),
+      ...(maxPrice && { min_price: "0", max_price: maxPrice }),
+    })
     fetchData()
-  }, [])
+  }, [filter, maxPrice])
 
   return (
-    <ProductsContext.Provider value={{ data, setData }}>
+    <ProductsContext.Provider
+      value={{ data, setData, setFilter, maxPrice, setMaxPrice }}
+    >
       {children}
     </ProductsContext.Provider>
   )

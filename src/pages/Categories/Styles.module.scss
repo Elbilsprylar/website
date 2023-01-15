@@ -5,6 +5,15 @@
   align-items: flex-start;
   padding: var(--padding-page) var(--padding-grid);
 
+  .container {
+    width: 100%;
+    max-width: 1340px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   @media screen and (min-width: 1000px) {
     padding: var(--padding-page) var(--padding-content);
   }
@@ -26,13 +35,10 @@
     text-align: left;
     border-bottom: solid #ddd 2px;
     margin-top: var(--padding-grid);
-
     min-width: 100%;
 
     @media screen and (min-width: 1000px) {
-      margin-top: var(--padding-content);
       min-width: 300px;
-      margin-left: var(--padding-page);
     }
 
     h1 {

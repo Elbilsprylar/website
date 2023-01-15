@@ -9,7 +9,7 @@ const CheckoutForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log("e", state)
+    // console.log("e", state)
   }
 
   return (

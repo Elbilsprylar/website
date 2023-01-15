@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet"
 import { CategoriesContext } from "providers/CategoriesProvider"
 import { GetPageCMS } from "providers/PageProvider"
 import {
-  GetProductsCategoriesById,
+  ProductsContext,
   ProductsCategoriesContext,
 } from "providers/ProductsProvider"
 
@@ -12,6 +12,7 @@ import Wrapper from "components/Wrapper"
 import ProductCard from "components/ProductCard"
 import Breadcrumbs from "components/Breadcrumbs"
 import { DummyCard } from "components/ProductCard"
+import FilterBar from "components/FilterBar"
 import Skeleton from "react-loading-skeleton"
 
 import styles from "./Styles.module.scss"
@@ -20,6 +21,7 @@ const Categories = () => {
   const { route } = useParams()
   const { data: headerCategories } = useContext(CategoriesContext)
   const { data: productsCategoriesData } = useContext(ProductsCategoriesContext)
+  const { data: productsData, setCategoryID } = useContext(ProductsContext)
 
   const currentProductsCategory =
     productsCategoriesData &&
@@ -41,9 +43,12 @@ const Categories = () => {
   const currentCategoryData = GetPageCMS(
     currentCategory && currentCategory.pageID && currentCategory.pageID
   )
-  const productsData = GetProductsCategoriesById({
-    id: currentProductsCategory && currentProductsCategory.id,
-  })
+
+  useEffect(() => {
+    if (currentProductsCategory) {
+      setCategoryID(currentProductsCategory.id)
+    }
+  }, [currentProductsCategory, setCategoryID])
 
   if (!headerCategories.loading && !currentCategory) {
     return <Redirect to="/not-found" />
@@ -52,63 +57,68 @@ const Categories = () => {
   return (
     <Wrapper additionalClass={styles.categories}>
       <Helmet title={currentCategory?.title ?? "Elbilsprylar"} />
-      {currentCategory && (
-        <div className={styles.breadcrumbsWrapper}>
-          <Breadcrumbs
-            links={[
-              {
-                title: currentCategory.title,
-                link: `/categories/${currentCategory.pageSlug}`,
-              },
-            ]}
-          />
-        </div>
-      )}
-      <article>
-        {!currentCategoryData.loading && currentCategoryData.data ? (
-          <>
-            {currentCategoryData.data.title &&
-              currentCategoryData.data.title.rendered && (
-                <h1>{currentCategoryData.data.title.rendered}</h1>
-              )}
-            {currentCategoryData.data.content &&
-              currentCategoryData.data.content.rendered && (
-                <div
-                  className={styles.descriptions}
-                  dangerouslySetInnerHTML={{
-                    __html: currentCategoryData.data.content.rendered,
-                  }}
-                />
-              )}
-          </>
-        ) : (
-          <div className={styles.dummyTitle}>
-            <Skeleton width={100} style={{ marginBottom: 14 }} />
-            <Skeleton width={350} style={{ marginBlockEnd: 5 }} count={2} />
+      <div className={styles.container}>
+        {currentCategory && (
+          <div className={styles.breadcrumbsWrapper}>
+            <Breadcrumbs
+              links={[
+                {
+                  title: currentCategory.title,
+                  link: `/categories/${currentCategory.pageSlug}`,
+                },
+              ]}
+            />
           </div>
         )}
-      </article>
-      {productsData && !productsData.loading ? (
-        <>
-          {productsData.data && productsData.data.length > 0 ? (
-            <div className={styles.productsContainer}>
-              {productsData.data.map((product, i) => (
-                <ProductCard key={i} product={product} />
-              ))}
-            </div>
+        <article>
+          {!currentCategoryData.loading && currentCategoryData.data ? (
+            <>
+              {currentCategoryData.data.title &&
+                currentCategoryData.data.title.rendered && (
+                  <h1>{currentCategoryData.data.title.rendered}</h1>
+                )}
+              {currentCategoryData.data.content &&
+                currentCategoryData.data.content.rendered && (
+                  <div
+                    className={styles.descriptions}
+                    dangerouslySetInnerHTML={{
+                      __html: currentCategoryData.data.content.rendered,
+                    }}
+                  />
+                )}
+            </>
           ) : (
-            <div className={styles.noProductsContainer}>
-              <p>Inga produkter att visa . . .</p>
+            <div className={styles.dummyTitle}>
+              <Skeleton width={100} style={{ marginBottom: 14 }} />
+              <Skeleton width={350} style={{ marginBlockEnd: 5 }} count={2} />
             </div>
           )}
-        </>
-      ) : (
-        <div className={styles.productsContainer}>
-          {[...new Array(4)].map((elem) => (
-            <DummyCard />
-          ))}
-        </div>
-      )}
+        </article>
+
+        <FilterBar />
+
+        {productsData && !productsData.loading ? (
+          <>
+            {productsData.data && productsData.data.length > 0 ? (
+              <div className={styles.productsContainer}>
+                {productsData.data.map((product, i) => (
+                  <ProductCard key={i} product={product} />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.noProductsContainer}>
+                <p>Inga produkter att visa . . .</p>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className={styles.productsContainer}>
+            {[...new Array(4)].map((elem) => (
+              <DummyCard />
+            ))}
+          </div>
+        )}
+      </div>
     </Wrapper>
   )
 }

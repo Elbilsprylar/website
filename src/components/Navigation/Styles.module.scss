@@ -13,7 +13,7 @@ nav {
 }
 
 .appNavShown {
-  transform: translateY(-138px);
+  transform: translateY(-155px);
 }
 
 .upperBar {
@@ -26,6 +26,7 @@ nav {
   padding: 0 var(--padding-grid);
   position: relative;
   font-size: 1rem;
+  font-weight: bold;
 
   @media screen and (max-width: 1000px) {
     justify-content: space-between;

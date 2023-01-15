@@ -4,6 +4,7 @@ import { api } from "api/woocommerce_api"
 export const ProductsContext = createContext()
 
 export const ProductsProvider = ({ children }) => {
+  const [categoryID, setCategoryID] = useState(null)
   const [filter, setFilter] = useState(null)
   const [maxPrice, setMaxPrice] = useState(20000)
   const [data, setData] = useState({
@@ -12,12 +13,18 @@ export const ProductsProvider = ({ children }) => {
     error: null,
   })
 
-  useEffect(() => console.log({ filter }), [filter])
-
   const fetchData = async () => {
+    // console.log("products", {
+    //   per_page: 100,
+    //   ...(categoryID && { category: categoryID }),
+    //   ...(filter && filter),
+    //   ...(maxPrice > 0 && { min_price: "0", max_price: maxPrice }),
+    // })
+
     try {
       const data = await api.get("products", {
-        per_page: 50,
+        per_page: 100,
+        ...(categoryID && { category: categoryID }),
         ...(filter && filter),
         ...(maxPrice > 0 && { min_price: "0", max_price: maxPrice }),
       })
@@ -41,17 +48,12 @@ export const ProductsProvider = ({ children }) => {
       ...prevState,
       loading: true,
     }))
-    console.log({
-      per_page: 50,
-      ...(filter && filter),
-      ...(maxPrice && { min_price: "0", max_price: maxPrice }),
-    })
     fetchData()
-  }, [filter, maxPrice])
+  }, [filter, maxPrice, categoryID])
 
   return (
     <ProductsContext.Provider
-      value={{ data, setData, setFilter, maxPrice, setMaxPrice }}
+      value={{ data, setData, setFilter, maxPrice, setMaxPrice, setCategoryID }}
     >
       {children}
     </ProductsContext.Provider>
@@ -155,6 +157,8 @@ export const ProductsCategoriesProvider = ({ children }) => {
 
 const ProductsCategoriesByIDContext = createContext()
 export const ProductsCategoriesByIDProvider = ({ children }) => {
+  const [filter, setFilter] = useState(null)
+  const [maxPrice, setMaxPrice] = useState(20000)
   const [data, setData] = useState({
     loading: false,
     data: null,
@@ -162,7 +166,9 @@ export const ProductsCategoriesByIDProvider = ({ children }) => {
   })
 
   return (
-    <ProductsCategoriesByIDContext.Provider value={{ data, setData }}>
+    <ProductsCategoriesByIDContext.Provider
+      value={{ data, setData, setFilter, maxPrice, setMaxPrice }}
+    >
       {children}
     </ProductsCategoriesByIDContext.Provider>
   )
@@ -261,7 +267,7 @@ export const SearchProductsProvider = ({ children }) => {
 
   const fetchData = async () => {
     try {
-      const data = await api.get("products", { per_page: 6, search: searchStr })
+      const data = await api.get("products", { search: searchStr })
 
       setData((prevState) => ({
         ...prevState,

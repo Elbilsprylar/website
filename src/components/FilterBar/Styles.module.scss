@@ -1,0 +1,97 @@
+@use "theme/_variables.scss" as *;
+
+.filterMenu {
+  margin-top: var(--padding-content);
+  width: 100%;
+  @include flex();
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+  }
+
+  .slider {
+    appearance: none;
+    max-width: 100%;
+    min-width: 150px;
+    height: 5px;
+    background: #227dd822;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      cursor: pointer;
+      height: 12px;
+      width: 5px;
+      background: #227dd8;
+    }
+
+    &::-moz-range-thumb {
+      cursor: pointer;
+    }
+  }
+
+  .filterDropdown {
+    &::after {
+      content: ">";
+      font: 14px "Consolas", monospace;
+      font-weight: bolder;
+      color: #222;
+      position: absolute;
+      transform: rotate(90deg);
+      // top: px;
+      right: 1rem;
+    }
+  }
+
+  section {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    @media screen and (max-width: 650px) {
+      &:not(:first-child) {
+        margin-top: var(--padding-grid);
+      }
+    }
+
+    p {
+      margin-right: var(--padding-grid);
+      white-space: nowrap;
+    }
+
+    span {
+      padding: 0.6rem 1.5rem;
+      white-space: nowrap;
+      margin-left: var(--padding-grid);
+      background: #efefef;
+      color: #aaa;
+      border-radius: 6px;
+    }
+
+    select {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      background: #efefef;
+      cursor: pointer;
+      appearance: none;
+      position: relative;
+      color: #aaa;
+
+      option {
+        color: #222;
+      }
+    }
+  }
+}

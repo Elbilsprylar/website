@@ -13,7 +13,7 @@ const TrustBox = () => {
     }
   }, [])
 
-  useEffect(() => console.log(ref), [ref])
+  // useEffect(() => console.log(ref), [ref])
 
   return (
     <div
@@ -24,9 +24,8 @@ const TrustBox = () => {
       <a
         href="https://www.trustpilot.com/review/example.com"
         target="_blank"
-        rel="noopener"
+        rel="noreferrer"
       >
-        {" "}
         Trustpilot
       </a>
     </div>

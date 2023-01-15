@@ -32,41 +32,46 @@ const Home = () => {
         </blockquote>
       </div>
       {/* <TrustBox /> */}
-      <div className={styles.popProducts}>
-        <h2>Populärt just nu</h2>
-        {productsData && !productsData.loading ? (
-          <>
-            {productsData.data && productsData.data.length > 0 ? (
-              <div className={styles.productsContainer}>
-                {productsData.data.slice(0, 4).map((product, i) => (
-                  <ProductCard key={i} product={product} />
-                ))}
-              </div>
-            ) : (
-              <div className={styles.noProductsContainer}>
-                <p>Inga produkter att visa . . .</p>
-              </div>
-            )}
-          </>
-        ) : (
-          <div className={styles.productsContainer}>
-            {[...new Array(4)].map(() => (
-              <DummyCard />
-            ))}
-          </div>
-        )}
-      </div>
-      <div>
-        {posts_data &&
-          posts_data.data &&
-          posts_data.data.map((item) => (
-            <div>
-              <h3>{item.title?.rendered ?? "Test"}</h3>
-              <div
-                dangerouslySetInnerHTML={{ __html: item.excerpt?.rendered }}
-              />
+      <div className={styles.container}>
+        <div className={styles.popProducts}>
+          <h2>Populärt just nu</h2>
+          {productsData && !productsData.loading ? (
+            <>
+              {productsData.data && productsData.data.length > 0 ? (
+                <div className={styles.productsContainer}>
+                  {productsData.data.slice(0, 4).map((product, i) => (
+                    <ProductCard key={i} product={product} />
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.noProductsContainer}>
+                  <p>Inga produkter att visa . . .</p>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className={styles.productsContainer}>
+              {[...new Array(4)].map(() => (
+                <DummyCard />
+              ))}
             </div>
-          ))}
+          )}
+        </div>
+        <div className={styles.postsContainer}>
+          <h2>Nyheter</h2>
+          <div className={styles.posts}>
+            {posts_data &&
+              posts_data.data &&
+              posts_data.data.map((item) => (
+                <div className={styles.post}>
+                  <h3>{item.title?.rendered ?? "Reklam"}</h3>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: item.content?.rendered }}
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
     </Wrapper>
   )

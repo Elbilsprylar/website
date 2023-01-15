@@ -39,7 +39,7 @@ const KlarnaView = ({ items }) => {
         return { id: p.product_id, amount: p.quantity }
       })
 
-      console.log("products- - - -", products)
+      // console.log("products- - - -", products)
 
       const res = await fetch(
         // "https://elbilsprylar.wpcomstaging.com/klarna/createOrder",
@@ -62,11 +62,11 @@ const KlarnaView = ({ items }) => {
 
       // const data = await res.json()
       // setCoHtml(await htmlSnippet.data)
-      console.log(await res)
+      // console.log(await res)
     }
 
     if (items && items.length > 0) {
-      console.log("Fetching . . .")
+      // console.log("Fetching . . .")
       // fetchHtml()
     }
   }, [items])

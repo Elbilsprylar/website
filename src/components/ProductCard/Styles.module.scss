@@ -19,7 +19,7 @@
   @include transition;
   flex: 0 1 320px;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 1000px) {
     width: auto;
     flex: 0 1 220px;
   }

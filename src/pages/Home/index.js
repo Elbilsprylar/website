@@ -1,4 +1,5 @@
 import React, { useContext } from "react"
+import { Link } from "react-router-dom"
 import { HomeContext } from "providers/HomeDataProvider"
 import { PopularProductsContext } from "providers/ProductsProvider"
 import { PostsContext } from "providers/PostsProvider"
@@ -34,7 +35,12 @@ const Home = () => {
       {/* <TrustBox /> */}
       <div className={styles.container}>
         <div className={styles.popProducts}>
-          <h2>Populärt just nu</h2>
+          <article className={styles.productHeader}>
+            <h2>Populärt just nu</h2>
+            <Link to="/alla-produkter" className={styles.productHeaderLink}>
+              se alla {">"}
+            </Link>
+          </article>
           {productsData && !productsData.loading ? (
             <>
               {productsData.data && productsData.data.length > 0 ? (
@@ -58,12 +64,12 @@ const Home = () => {
           )}
         </div>
         <div className={styles.postsContainer}>
-          <h2>Nyheter</h2>
           <div className={styles.posts}>
             {posts_data &&
               posts_data.data &&
               posts_data.data.map((item) => (
                 <div className={styles.post}>
+                  <span>nyhet</span>
                   <h3>{item.title?.rendered ?? "Reklam"}</h3>
                   <div
                     dangerouslySetInnerHTML={{ __html: item.content?.rendered }}

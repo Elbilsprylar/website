@@ -61,17 +61,6 @@
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-  gap: 2rem 1rem;
-
-  @media screen and (max-width: 1400px) {
-    max-width: 1000px;
-    gap: 1rem;
-  }
-
-  @media screen and (max-width: 1200px) {
-    max-width: 800px;
-    gap: 1rem 0.5rem;
-  }
 }
 
 .descriptions {

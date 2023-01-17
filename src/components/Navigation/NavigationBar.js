@@ -189,6 +189,13 @@ const NavigationBar = () => {
           </div>
         </div>
         <aside className={styles.mobileNavMenu}>
+          <Link
+            to="/alla-produkter"
+            onClick={() => setMobileMenuShown(false)}
+            className={styles.mobileNavMenuItem}
+          >
+            Alla Produkter
+          </Link>
           <div
             className={styles.mobileNavMenuItem}
             onClick={() => setMobileCategoriesShow(!mobileCategoriesShow)}

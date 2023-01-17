@@ -28,6 +28,20 @@
     }
   }
 
+  .productHeader {
+    width: 100%;
+    @include flex();
+    flex-direction: row;
+    justify-content: space-between;
+
+    .productHeaderLink {
+      color: var(--color-primary);
+      font-weight: bold;
+      border-bottom: solid var(--color-primary) 2px;
+      font-size: 15px;
+    }
+  }
+
   .popProducts,
   .postsContainer {
     margin: var(--padding-page) 0;
@@ -56,16 +70,19 @@
   }
 
   .productsContainer {
-    margin: 0 auto;
+    margin: 0rem -0.5rem;
     max-width: 1340px;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    justify-content: center;
-    gap: 2rem 1rem;
+    justify-content: flex-start;
 
-    @media screen and (max-width: 1200px) {
-      gap: 1rem 0.5rem;
+    div {
+      @media screen and (max-width: 1000px) {
+        width: auto;
+        padding: 0.2rem;
+        flex: 0 0 50% !important;
+      }
     }
   }
 }
@@ -89,13 +106,15 @@
   }
 
   .post {
+    position: relative;
     padding: var(--padding-content);
-    background: #f2f2f2;
+    background: #227dd822;
+    background: var(--color-breadcrumbs-wrapper);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-    border-radius: 10px;
+    border-radius: 6px;
     width: 50%;
 
     @media screen and (max-width: 1100px) {
@@ -104,6 +123,19 @@
 
     @media screen and (max-width: 600px) {
       max-width: 350px;
+    }
+
+    span {
+      position: absolute;
+      top: -0.8rem;
+      right: 1rem;
+      background: var(--color-alert);
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 10px;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
     }
 
     div {
@@ -123,7 +155,7 @@
     p {
       max-width: 60ch;
       margin: 0.5rem 0rem;
-      color: #888;
+      color: #666;
       margin-right: var(--padding-content);
     }
 

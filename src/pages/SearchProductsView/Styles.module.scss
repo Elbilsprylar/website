@@ -25,10 +25,10 @@
     right: 0;
     left: 0;
     background: var(--color-breadcrumbs-wrapper);
-    padding: 0.5rem var(--padding-content);
+    padding: 0.5rem;
 
     @media screen and (min-width: 1000px) {
-      padding: 0.5rem calc(var(--padding-page) * 1.5);
+      padding: 0.5rem var(--padding-page);
     }
   }
 

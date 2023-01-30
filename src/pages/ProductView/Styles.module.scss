@@ -8,7 +8,6 @@
   align-items: flex-start;
   justify-content: space-between;
   flex-direction: row;
-  gap: var(--padding-page);
 
   .productContainer,
   .productGallery {
@@ -22,12 +21,19 @@
     }
   }
 
+  .productGallery {
+    padding: 0;
+  }
+
   .productContainer {
     border-left: solid 2.5px #eee;
     max-width: 600px;
     padding: var(--padding-content) var(--padding-page);
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (min-width: 800px) {
+      margin-left: var(--padding-content);
+    }
+    @media screen and (max-width: 800px) {
       border-left: none;
       max-width: initial;
 
@@ -50,11 +56,8 @@
 
   .productInfo {
     text-align: left;
-    padding: 0 var(--padding-content);
 
     .categoriesLinks {
-      // margin: 0.5rem 0 0rem;
-
       a {
         font-size: 0.9rem;
         color: var(--color-primary);
@@ -73,10 +76,6 @@
       p {
         color: var(--color-text-muted);
       }
-    }
-
-    @media screen and (max-width: 1000px) {
-      padding: 0 var(--padding-grid);
     }
 
     .price {
@@ -98,7 +97,7 @@
     gap: calc(var(--padding-grid) / 2);
 
     @media screen and (max-width: 1000px) {
-      padding: calc(var(--padding-grid) * 1.5) var(--padding-grid);
+      padding: calc(var(--padding-grid) * 1.5) 0;
     }
   }
 
@@ -134,7 +133,7 @@
     }
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 800px) {
     flex-direction: column;
     align-items: center;
     padding: var(--padding-page) var(--padding-grid);
@@ -151,7 +150,6 @@
       @include flex;
       flex-direction: row;
       justify-content: space-between;
-      background: var(--bg-color);
       z-index: 2;
     }
 
@@ -198,7 +196,6 @@
 
   .fullDescriptionMobile {
     border-top: solid 2.5px #eee;
-    padding: 0 var(--padding-grid);
 
     @media screen and (min-width: 1000px) {
       display: none;

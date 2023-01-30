@@ -16,6 +16,7 @@
 
   @media screen and (min-width: 1000px) {
     padding: var(--padding-page) var(--padding-content);
+    padding-top: var(--padding-grid);
   }
 
   .breadcrumbsWrapper {
@@ -24,43 +25,76 @@
     right: 0;
     left: 0;
     background: var(--color-breadcrumbs-wrapper);
-    padding: 0.5rem var(--padding-content);
+    padding: 0.5rem;
 
     @media screen and (min-width: 1000px) {
-      padding: 0.5rem calc(var(--padding-page) * 1.5);
+      padding: 0.5rem var(--padding-page);
     }
   }
 
-  article {
+  .descriptionContainer {
     text-align: left;
     border-bottom: solid #ddd 2px;
     margin-top: var(--padding-grid);
     min-width: 100%;
+    width: 100%;
+    height: 350px;
+    position: relative;
+    padding: var(--padding-content);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    figure {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -100;
+      @include flex();
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto;
+
+        @media screen and (max-width: 600px) {
+          height: 100%;
+          width: auto;
+        }
+      }
+    }
 
     @media screen and (min-width: 1000px) {
       min-width: 300px;
     }
 
     h1 {
+      color: #222;
       font-size: 1.3rem;
       text-transform: uppercase;
     }
 
     p {
       margin: 0.5rem 0 var(--padding-grid);
-      color: var(--color-text-muted);
+      color: #222;
     }
   }
 }
 
 .productsContainer {
-  padding-top: var(--padding-page);
+  padding-top: var(--padding-grid);
   margin: 0 auto;
   max-width: 1400px;
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: flex-start;
 }
 
 .descriptions {

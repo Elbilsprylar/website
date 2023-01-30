@@ -36,6 +36,10 @@ const ProductsView = () => {
     }
   }, [product])
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+  }, [])
+
   const fetchData = async () => {
     try {
       const res = await getCartItems()

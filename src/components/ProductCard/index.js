@@ -50,36 +50,52 @@ const ProductCard = ({ product }) => {
   return (
     <div className={styles.block}>
       <div className={styles.imgLink}>
-        <button
-          className={cn(styles.cta, { [styles.loading]: data.loading })}
-          onClick={() =>
-            !data.loading && addItemToCart({ productID: product.id ?? 0 })
-          }
-        >
-          <AddToCart />
-        </button>
         <Link to={`/product/${product.slug}/${product.id}`}>
           <img src={product.images[0]?.src} alt={product.name} />
         </Link>
       </div>
-      <section className={styles.info}>
-        {product.stock_status === "outofstock" && (
-          <span className={styles.productStatusUnAvailable}>
-            Tillfäligt slut
-          </span>
-        )}
-        <p className={styles.name}>{product.name}</p>
-        <div
-          className={styles.price}
-          dangerouslySetInnerHTML={{ __html: product.price_html }}
-        />
-        {/* <button
+      {product.stock_status === "outofstock" && (
+        <span className={styles.productStatusUnAvailable}>Tillfäligt slut</span>
+      )}
+      <p className={styles.name}>{product.name}</p>
+      <div
+        className={styles.shortDescription}
+        dangerouslySetInnerHTML={{ __html: product.short_description }}
+      />
+      <section className={styles.attributesSection}>
+        {product &&
+          product.attributes &&
+          product.attributes.length > 0 &&
+          product.attributes.map((attr) => (
+            <>
+              <h4>{attr.name}</h4>
+              <article>
+                {attr.options.map((item) => (
+                  <span>{item}</span>
+                ))}
+              </article>
+            </>
+          ))}
+      </section>
+      <div
+        className={styles.price}
+        dangerouslySetInnerHTML={{ __html: product.price_html }}
+      />
+      <button
+        className={cn(styles.cta, { [styles.loading]: data.loading })}
+        onClick={() =>
+          !data.loading && addItemToCart({ productID: product.id ?? 0 })
+        }
+      >
+        <AddToCart />
+      </button>
+      {/* <button
           className={cn(styles.cta, { [styles.loading]: data.loading })}
           onClick={() => !data.loading && addItemToCart({ product: product })}
         >
           <AddToCart />
         </button> */}
-      </section>
+      {/* </section> */}
     </div>
   )
 }

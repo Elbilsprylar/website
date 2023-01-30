@@ -1,16 +1,18 @@
 @use "theme/_variables.scss" as *;
 
 .filterMenu {
-  margin-top: var(--padding-content);
+  margin-top: var(--padding-grid);
+  // background: #f9f9f9;
+  padding: var(--padding-grid);
   width: 100%;
   @include flex();
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-end;
 
-  @media screen and (max-width: 650px) {
-    flex-direction: column;
-  }
+  // @media screen and (max-width: 650px) {
+  //   flex-direction: column;
+  // }
 
   .slider {
     appearance: none;
@@ -70,12 +72,17 @@
       white-space: nowrap;
     }
 
+    span,
+    select {
+      background: #efefef;
+      color: #666;
+      font-weight: bold;
+    }
+
     span {
       padding: 0.6rem 1.5rem;
       white-space: nowrap;
       margin-left: var(--padding-grid);
-      background: #efefef;
-      color: #aaa;
       border-radius: 6px;
     }
 
@@ -83,11 +90,9 @@
       padding: 0.8rem 1.5rem;
       border: none;
       border-radius: 6px;
-      background: #efefef;
       cursor: pointer;
       appearance: none;
       position: relative;
-      color: #aaa;
 
       option {
         color: #222;

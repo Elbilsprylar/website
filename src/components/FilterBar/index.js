@@ -26,7 +26,7 @@ const FilterBar = ({ context }) => {
 
   return (
     <div className={styles.filterMenu}>
-      <section>
+      {/* <section>
         <p>Max pris: </p>
         <input
           type="range"
@@ -42,7 +42,7 @@ const FilterBar = ({ context }) => {
         <span>{`${tempMaxPrice
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, " ")} kr`}</span>
-      </section>
+      </section> */}
       <section className={styles.filterDropdown}>
         <p>Sortera på: </p>
         <select onChange={(e) => handelFilterChange(e.target.value)}>

@@ -27,7 +27,7 @@ const ProductsView = () => {
             links={[{ title: "Alla produkter", link: "/alla-produkter" }]}
           />
         </div>
-        <article>
+        <article className={styles.productsTitle}>
           <h1>Alla produkter</h1>
         </article>
 

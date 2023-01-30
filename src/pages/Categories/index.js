@@ -70,7 +70,7 @@ const Categories = () => {
             />
           </div>
         )}
-        <article>
+        <div className={styles.descriptionContainer}>
           {!currentCategoryData.loading && currentCategoryData.data ? (
             <>
               {currentCategoryData.data.title &&
@@ -93,7 +93,7 @@ const Categories = () => {
               <Skeleton width={350} style={{ marginBlockEnd: 5 }} count={2} />
             </div>
           )}
-        </article>
+        </div>
 
         <FilterBar />
 

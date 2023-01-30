@@ -25,14 +25,14 @@
     right: 0;
     left: 0;
     background: var(--color-breadcrumbs-wrapper);
-    padding: 0.5rem var(--padding-content);
+    padding: 0.5rem 1rem;
 
-    @media screen and (min-width: 1000px) {
-      padding: 0.5rem calc(var(--padding-page) * 1.5);
+    @media screen and (min-width: 1400px) {
+      padding: 0.5rem var(--padding-page);
     }
   }
 
-  article {
+  .productsTitle {
     text-align: left;
     border-bottom: solid #ddd 2px;
     min-width: 100%;
@@ -54,7 +54,7 @@
     max-width: 1400px;
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: flex-start;
   }
 }

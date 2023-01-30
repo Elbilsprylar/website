@@ -10,7 +10,7 @@ import { CartButton } from "components/CartButton"
 import { ReactComponent as CartIcon } from "assets/cart-icon.svg"
 import { ReactComponent as TelIcon } from "assets/tel.svg"
 import { ReactComponent as ArrowDown } from "assets/arrow-down.svg"
-import { ReactComponent as Logo } from "assets/logo.svg"
+import { ReactComponent as Logo } from "assets/logo_cropped.svg"
 import { ReactComponent as MenuIcon } from "assets/menu.svg"
 import { ReactComponent as CloseIcon } from "assets/close.svg"
 
@@ -61,7 +61,7 @@ const NavigationBar = () => {
       <nav
         className={cn(
           styles.appNav,
-          scrollOffset > 100 && !mobileMenuShown && styles.appNavShown
+          scrollOffset > 80 && !mobileMenuShown && styles.appNavShown
         )}
       >
         <div className={styles.upperBar}>
@@ -149,14 +149,14 @@ const NavigationBar = () => {
           </>
         ) : (
           // Mobile navbar
-          <div className={styles.mobileNave}>
+          <div className={styles.mobileNav}>
             <div className={styles.topSection}>
               <MenuIcon
                 className={styles.menuIcon}
                 onClick={() => setMobileMenuShown(true)}
               />
 
-              <Link to="/">
+              <Link className={styles.logoLink} to="/">
                 <Logo />
               </Link>
 

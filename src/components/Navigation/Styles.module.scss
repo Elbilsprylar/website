@@ -1,6 +1,6 @@
 @use "theme/_variables.scss" as *;
 
-nav {
+.appNav {
   position: sticky;
   top: 0;
   background: var(--navbar-color);
@@ -174,17 +174,19 @@ nav {
     padding: 0.6rem 0;
 
     a {
+      color: #fff;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: bold;
       position: relative;
       padding: 0.4rem 1.5rem;
       margin: 0.2rem;
       border-radius: 2rem;
-      font-family: "Montserrat", sans-serif;
+      letter-spacing: 0.6px;
+      font-family: "Mulish", sans-serif;
       @include transition;
 
       &:hover {
-        color: #fff;
+        // color: #fff;
         background-color: #fff2;
       }
 
@@ -207,10 +209,21 @@ nav {
 
 // MOBILE VIEW
 
-.mobileNave {
+.mobileNav {
   .topSection {
     margin: 0 1.5rem;
     padding: var(--padding-grid) 0;
+
+    .logoLink {
+      margin-right: auto;
+      margin-left: var(--padding-content);
+
+      @media screen and (max-width: 400px) {
+        svg {
+          max-width: 200px;
+        }
+      }
+    }
   }
 
   @media screen and (min-width: 1000px) {
@@ -347,57 +360,6 @@ nav {
     left: 0;
   }
 }
-
-// .searchContainer {
-//   position: relative;
-
-//   .searchResultsList {
-//     top: 100%;
-//     width: 90%;
-//     background: #fff;
-//     position: absolute;
-//     @include flex();
-//     z-index: 1000;
-//     transform: translateX(50%, -50%);
-//     border-bottom-right-radius: 0.5rem;
-//     border-bottom-left-radius: 0.5rem;
-//     box-shadow: 0px 4px 20px #2222;
-
-//     .item {
-//       width: 100%;
-//       height: 62px;
-//       padding: 0 2rem;
-//       font-size: 15px;
-
-//       &:not(:last-child) {
-//         border-bottom: solid #f2f2f2 2px;
-//       }
-
-//       img {
-//         max-height: 100%;
-//         width: 46px;
-//         margin-right: 1rem;
-//       }
-
-//       a {
-//         width: 100%;
-//         height: 100%;
-//         @include flex();
-//         flex-direction: row;
-//       }
-
-//       .price {
-//         margin-left: auto;
-//         color: var(--color-primary);
-//         font-weight: bold;
-//       }
-
-//       .name {
-//         color: #666;
-//       }
-//     }
-//   }
-// }
 
 .searchContainer {
   background: #fff;

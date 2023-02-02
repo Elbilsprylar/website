@@ -3,7 +3,8 @@
 .categories {
   position: relative;
   align-items: flex-start;
-  padding: var(--padding-page) var(--padding-grid);
+  // padding: var(--padding-page) var(--padding-grid);
+  padding: 0 !important;
 
   .container {
     width: 100%;
@@ -38,7 +39,7 @@
     margin-top: var(--padding-grid);
     min-width: 100%;
     width: 100%;
-    height: 350px;
+    height: 400px;
     position: relative;
     padding: var(--padding-content);
     display: flex;
@@ -88,7 +89,7 @@
 }
 
 .productsContainer {
-  padding-top: var(--padding-grid);
+  padding: var(--padding-grid);
   margin: 0 auto;
   max-width: 1400px;
   display: flex;

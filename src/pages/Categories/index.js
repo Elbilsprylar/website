@@ -57,6 +57,30 @@ const Categories = () => {
   return (
     <Wrapper additionalClass={styles.categories}>
       <Helmet title={currentCategory?.title ?? "Elbilsprylar"} />
+      <div className={styles.descriptionContainer}>
+        {!currentCategoryData.loading && currentCategoryData.data ? (
+          <>
+            {currentCategoryData.data.title &&
+              currentCategoryData.data.title.rendered && (
+                <h1>{currentCategoryData.data.title.rendered}</h1>
+              )}
+            {currentCategoryData.data.content &&
+              currentCategoryData.data.content.rendered && (
+                <div
+                  className={styles.descriptions}
+                  dangerouslySetInnerHTML={{
+                    __html: currentCategoryData.data.content.rendered,
+                  }}
+                />
+              )}
+          </>
+        ) : (
+          <div className={styles.dummyTitle}>
+            <Skeleton width={100} style={{ marginBottom: 14 }} />
+            <Skeleton width={350} style={{ marginBlockEnd: 5 }} count={2} />
+          </div>
+        )}
+      </div>
       <div className={styles.container}>
         {currentCategory && (
           <div className={styles.breadcrumbsWrapper}>
@@ -70,30 +94,6 @@ const Categories = () => {
             />
           </div>
         )}
-        <div className={styles.descriptionContainer}>
-          {!currentCategoryData.loading && currentCategoryData.data ? (
-            <>
-              {currentCategoryData.data.title &&
-                currentCategoryData.data.title.rendered && (
-                  <h1>{currentCategoryData.data.title.rendered}</h1>
-                )}
-              {currentCategoryData.data.content &&
-                currentCategoryData.data.content.rendered && (
-                  <div
-                    className={styles.descriptions}
-                    dangerouslySetInnerHTML={{
-                      __html: currentCategoryData.data.content.rendered,
-                    }}
-                  />
-                )}
-            </>
-          ) : (
-            <div className={styles.dummyTitle}>
-              <Skeleton width={100} style={{ marginBottom: 14 }} />
-              <Skeleton width={350} style={{ marginBlockEnd: 5 }} count={2} />
-            </div>
-          )}
-        </div>
 
         <FilterBar />
 

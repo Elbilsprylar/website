@@ -122,7 +122,7 @@ export const ProductsCategoriesProvider = ({ children }) => {
 
   const fetchData = async () => {
     try {
-      const data = await api.get("products/categories")
+      const data = await api.get("products/categories", { per_page: 50 })
 
       setData((prevState) => ({
         ...prevState,

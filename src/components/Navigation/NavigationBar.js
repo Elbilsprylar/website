@@ -135,9 +135,8 @@ const NavigationBar = () => {
                         key={route.title}
                         to={`/categories/${route.pageSlug}`}
                         className={cn({
-                          [styles.activeLink]: location.pathname.includes(
-                            route.pageSlug
-                          ),
+                          [styles.activeLink]:
+                            location.pathname.split("/")[2] === route.pageSlug,
                         })}
                       >
                         {route.title}

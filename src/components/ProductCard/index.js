@@ -62,6 +62,18 @@ const ProductCard = ({ product }) => {
         className={styles.shortDescription}
         dangerouslySetInnerHTML={{ __html: product.short_description }}
       />
+      <div
+        className={styles.price}
+        dangerouslySetInnerHTML={{ __html: product.price_html }}
+      />
+      <button
+        className={cn(styles.cta, { [styles.loading]: data.loading })}
+        onClick={() =>
+          !data.loading && addItemToCart({ productID: product.id ?? 0 })
+        }
+      >
+        <AddToCart />
+      </button>
       <section className={styles.attributesSection}>
         {product &&
           product.attributes &&
@@ -77,18 +89,6 @@ const ProductCard = ({ product }) => {
             </>
           ))}
       </section>
-      <div
-        className={styles.price}
-        dangerouslySetInnerHTML={{ __html: product.price_html }}
-      />
-      <button
-        className={cn(styles.cta, { [styles.loading]: data.loading })}
-        onClick={() =>
-          !data.loading && addItemToCart({ productID: product.id ?? 0 })
-        }
-      >
-        <AddToCart />
-      </button>
       {/* <button
           className={cn(styles.cta, { [styles.loading]: data.loading })}
           onClick={() => !data.loading && addItemToCart({ product: product })}
@@ -105,12 +105,10 @@ export default ProductCard
 export const DummyCard = () => {
   return (
     <div className={cn(styles.block, styles.dummyBlock)}>
-      <div className={styles.imgLink}>
-        <Skeleton width={300} height={300} />
-      </div>
+      <div className={styles.imgLink}></div>
       <section className={styles.info}>
         <Skeleton width={100} />
-        <Skeleton width={250} count={3} />
+        <Skeleton width={150} count={3} />
       </section>
     </div>
   )

@@ -30,6 +30,7 @@ import NotFound from "pages/NotFound"
 import PrivacyPolicy from "pages/PrivacyPolicy"
 import Terms from "pages/Terms"
 import QandA from "pages/QandA"
+import Completion from "pages/Completion"
 
 const Routes = () => {
   return (
@@ -104,6 +105,11 @@ const Routes = () => {
                                   path={"/privacy-policy"}
                                   exact
                                   component={PrivacyPolicy}
+                                />
+                                <Route
+                                  path={"/completion"}
+                                  exact
+                                  component={Completion}
                                 />
                                 <Route path={"*"} exact component={NotFound} />
                               </Switch>

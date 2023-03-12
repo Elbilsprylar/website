@@ -1,0 +1,23 @@
+@use "theme/_variables.scss" as *;
+
+.success {
+  @include flex;
+  min-height: 80vh;
+  justify-content: center;
+
+  blockquote {
+    text-align: center;
+    font-size: 2.4rem;
+  }
+
+  p {
+    color: #888;
+    max-width: 46ch;
+    margin: 0.5rem 0rem 3.5rem;
+  }
+
+  .svg {
+    width: 100px;
+    margin-bottom: 3rem;
+  }
+}

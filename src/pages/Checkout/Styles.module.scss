@@ -18,7 +18,7 @@
       @include flex;
       align-items: flex-start;
       background: #fff;
-      padding: 1rem 2rem;
+      padding: 1rem;
 
       p {
         display: flex;
@@ -238,7 +238,7 @@
 .productWrapper {
   position: relative;
   background: #fff;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
   margin-bottom: 1rem;
   @include flex;
   width: 100%;

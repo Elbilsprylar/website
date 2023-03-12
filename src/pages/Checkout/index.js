@@ -8,11 +8,11 @@ import calcCartData from "helpers/calculateCartData"
 import { updateCartItem, deleteCartItem } from "utils/cart"
 import Skeleton from "react-loading-skeleton"
 import Wrapper from "components/Wrapper"
-import CheckoutForm from "components/CheckoutForm"
-import KlarnaView from "components/KlarnaView"
 
 import { ReactComponent as Delete } from "assets/delete.svg"
 import { ReactComponent as CartIcon } from "assets/cart-icon-large.svg"
+
+import PaymentElement from "./PaymentElement"
 import styles from "./Styles.module.scss"
 
 const CartItem = ({ product, upgradeItem, deleteItem }) => {
@@ -82,7 +82,6 @@ const DummyCartItem = ({ product, upgradeItem, deleteItem }) => {
 }
 
 const Checkout = () => {
-  // const [coHtml, setCoHtml] = useState("")
   const { data: cartItemsData, setData } = useContext(CartContext)
   const [cartInfo, setCartInfo] = useState({ totalAmount: 0, totalCount: 0 })
   const shipping = 0
@@ -169,7 +168,7 @@ const Checkout = () => {
     <Wrapper additionalClass={styles.checkout}>
       <Helmet title={"Kassa"} />
       <div className={styles.itemsWrapper}>
-        <h1>Kassa</h1>
+        <h1>Kundvagn</h1>
         {!cartItemsData.loading ? (
           <>
             {/* Cart items */}
@@ -219,12 +218,15 @@ const Checkout = () => {
         </section>
       </div>
       <div className={styles.checkoutFormContainer}>
-        <h1>Kassa</h1>
-        {!cartItemsData.loading ? (
-          <KlarnaView items={cartItemsData.data} />
-        ) : (
-          <p>loading . . .</p>
-        )}
+        {cartItemsData.data &&
+          cartItemsData.data.length > 0 &&
+          cartInfo &&
+          cartInfo.totalAmount && (
+            <PaymentElement
+              purchasedProducts={cartItemsData.data}
+              purchaseAmount={cartInfo.totalAmount ?? 0}
+            />
+          )}
       </div>
     </Wrapper>
   )

@@ -1,0 +1,24 @@
+@use "theme/_variables.scss" as *;
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  .formBtn {
+    width: 100%;
+    padding: 1rem !important;
+    margin-top: var(--padding-content);
+    align-self: flex-end;
+  }
+}
+
+.nameSection {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+
+  div {
+    flex: 1 0 calc(50% - 1rem);
+  }
+}

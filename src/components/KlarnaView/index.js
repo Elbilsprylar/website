@@ -1,9 +1,10 @@
 import React, { useEffect } from "react"
 
 const KlarnaView = ({ items }) => {
-  const clientSecret = "JiIe1N2taV1QchdC"
-  const clientId = "PK68895_b1b45fcd4f76"
+  const clientSecret = "WiEDCqc8zIF81jfV"
+  const clientId = "K6173655_3391b54ddb69"
   const authorizationBasic = window.btoa(clientId + ":" + clientSecret)
+
   const orderObj = {
     purchase_country: "GB",
     purchase_currency: "GBP",
@@ -76,13 +77,10 @@ const KlarnaView = ({ items }) => {
       redirect: "follow",
     }
 
-    fetch(
-      "https://api.playground.klarna.com/checkout/v3/orders",
-      requestOptions
-    )
+    fetch("https://api.klarna.com/checkout/v3/orders", requestOptions)
       .then((response) => response.json())
       .then((result) => console.log(result))
-      .catch((error) => console.log("error", error))
+      .catch((error) => console.error("error", error))
   }, [items])
 
   const html_snippet =

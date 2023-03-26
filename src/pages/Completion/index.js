@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useHistory } from "react-router-dom"
 
 import Wrapper from "components/Wrapper"
@@ -9,7 +9,6 @@ import styles from "./Styles.module.scss"
 
 const Completion = () => {
   const history = useHistory()
-  useEffect(() => history.push("/completion"), [])
 
   return (
     <Wrapper additionalClass={styles.success}>

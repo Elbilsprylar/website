@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import { useStripe, useElements } from "@stripe/react-stripe-js"
 import Button from "components/Button"
 import styles from "./styles.module.scss"
+import { deleteCartItems } from "api/cart"
 
 const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
   const history = useHistory()
@@ -24,7 +25,7 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
           method: "POST",
           body: JSON.stringify({
             email: "dsoul996@gmail.com",
-            html: emailContent,
+            message: emailContent,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -104,6 +105,7 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
         } SEK 
         `
         postOrder({ emailContent })
+        deleteCartItems()
         history.push("/completion")
       } else {
         setMessage("An unexpected error occured.")

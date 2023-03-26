@@ -38,7 +38,10 @@ const ProductsView = () => {
             {productsData.data && productsData.data.length > 0 ? (
               <div className={styles.productsContainer}>
                 {productsData.data.map((product, i) => (
-                  <ProductCard key={`${product.name}-${i}`} product={product} />
+                  <ProductCard
+                    key={`${product.name}-${product.id}-${i}`}
+                    product={product}
+                  />
                 ))}
               </div>
             ) : (

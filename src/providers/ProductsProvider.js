@@ -14,13 +14,6 @@ export const ProductsProvider = ({ children }) => {
   })
 
   const fetchData = async () => {
-    // console.log("products", {
-    //   per_page: 100,
-    //   ...(categoryID && { category: categoryID }),
-    //   ...(filter && filter),
-    //   ...(maxPrice > 0 && { min_price: "0", max_price: maxPrice }),
-    // })
-
     try {
       const data = await api.get("products", {
         per_page: 100,

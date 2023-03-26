@@ -78,24 +78,17 @@ const ProductCard = ({ product }) => {
         {product &&
           product.attributes &&
           product.attributes.length > 0 &&
-          product.attributes.map((attr) => (
-            <>
+          product.attributes.map((attr, i) => (
+            <React.Fragment key={`${attr.name}-${i}`}>
               <h4>{attr.name}</h4>
               <article>
-                {attr.options.map((item) => (
-                  <span>{item}</span>
+                {attr.options.map((item, i) => (
+                  <span key={`${item}-${i}`}>{item}</span>
                 ))}
               </article>
-            </>
+            </React.Fragment>
           ))}
       </section>
-      {/* <button
-          className={cn(styles.cta, { [styles.loading]: data.loading })}
-          onClick={() => !data.loading && addItemToCart({ product: product })}
-        >
-          <AddToCart />
-        </button> */}
-      {/* </section> */}
     </div>
   )
 }

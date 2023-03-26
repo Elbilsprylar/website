@@ -57,8 +57,8 @@ const Home = () => {
             </>
           ) : (
             <div className={styles.productsContainer}>
-              {[...new Array(4)].map(() => (
-                <DummyCard />
+              {[...new Array(4)].map((i) => (
+                <DummyCard key={i} />
               ))}
             </div>
           )}
@@ -67,8 +67,11 @@ const Home = () => {
           <div className={styles.posts}>
             {posts_data &&
               posts_data.data &&
-              posts_data.data.map((item) => (
-                <div className={styles.post}>
+              posts_data.data.map((item, i) => (
+                <div
+                  key={`${item.title?.rendered}-${i}`}
+                  className={styles.post}
+                >
                   <span>nyhet</span>
                   <h3>{item.title?.rendered ?? "Reklam"}</h3>
                   <div

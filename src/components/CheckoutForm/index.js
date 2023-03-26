@@ -1,10 +1,12 @@
 import { PaymentElement, AddressElement } from "@stripe/react-stripe-js"
 import { useState } from "react"
+import { useHistory } from "react-router-dom"
 import { useStripe, useElements } from "@stripe/react-stripe-js"
 import Button from "components/Button"
 import styles from "./styles.module.scss"
 
 const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
+  const history = useHistory()
   const stripe = useStripe()
   const elements = useElements()
 
@@ -14,14 +16,30 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
   const [message, setMessage] = useState(null)
   const [isProcessing, setIsProcessing] = useState(false)
 
-  console.log({ purchasedProducts })
+  const postOrder = async ({ emailContent }) => {
+    try {
+      await fetch(
+        "https://remarkable-fudge-1aae0b.netlify.app/.netlify/functions/api/send-email",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: "dsoul996@gmail.com",
+            html: emailContent,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+    } catch (e) {
+      console.log({ error: e })
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return
     }
 
@@ -40,18 +58,10 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
     }
 
     try {
-      const { paymentIntent } = await stripe.confirmPayment({
+      const { paymentIntent, error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
           receipt_email: email,
-          // receipt: {
-          //   items: purchasedProducts.map((product) => ({
-          //     description: product.data.name,
-          //     quantity: product.quantity,
-          //     amount: product.data.price,
-          //     currency: "usd",
-          //   })),
-          // },
           payment_method_data: {
             billing_details: billingDetails,
           },
@@ -66,13 +76,16 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
             },
             name: userName,
           },
-          // return_url: `${window.location}/completion`,
-          // return_url: `https://localhost:3000/completion`,
         },
         redirect: "if_required",
       })
 
-      if (paymentIntent.status === "succeeded") {
+      if (
+        error &&
+        (error.type === "card_error" || error.type === "validation_error")
+      ) {
+        setMessage(error.message)
+      } else if (paymentIntent.status === "succeeded") {
         const address = paymentIntent.shipping.address
 
         let productList = ""
@@ -86,24 +99,15 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
           paymentIntent.receipt_email
         }\nAddress: ${address.line1}, ${address.postal_code} ${address.city}\n${
           address.line2 ? `Tilläggs-adress: ${address.line2}\n` : "\n"
-        }\n-------------------------------------------------------------------\n\nProdukter: \n${productList}\n-------------------------------------------------------------------\n\nTotal belop: ${
+        }\n------------------------------------------\n\nProdukter: \n${productList}\n------------------------------------------\n\nTotal belop: ${
           paymentIntent.amount
         } SEK 
         `
-
-        console.log(emailContent)
+        postOrder({ emailContent })
+        history.push("/completion")
+      } else {
+        setMessage("An unexpected error occured.")
       }
-
-      // if (error.type === "card_error" || error.type === "validation_error") {
-      //   setMessage(error.message)
-      // } else if (paymentIntent.status === "succeeded") {
-      //   console.log(paymentIntent.status)
-      //   console.log("Done....")
-      //   console.log({ error })
-      //   alert(error)
-      // } else {
-      //   setMessage("An unexpected error occured.")
-      // }
     } catch (e) {
       console.log({ error: e })
     }

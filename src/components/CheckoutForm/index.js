@@ -14,6 +14,8 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
   const [message, setMessage] = useState(null)
   const [isProcessing, setIsProcessing] = useState(false)
 
+  console.log({ purchasedProducts })
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -37,53 +39,73 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
       },
     }
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        receipt_email: email,
-        // receipt: {
-        //   items: purchasedProducts.map((product) => ({
-        //     description: product.data.name,
-        //     quantity: product.quantity,
-        //     amount: product.data.price,
-        //     currency: "usd",
-        //   })),
-        // },
-        payment_method_data: {
-          billing_details: billingDetails,
-        },
-        shipping: {
-          address: {
-            city: addressFormValue.city,
-            country: addressFormValue.country,
-            line1: addressFormValue.line1,
-            line2: addressFormValue.line2,
-            postal_code: addressFormValue.postal_code,
-            state: addressFormValue.state,
+    try {
+      const { paymentIntent } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          receipt_email: email,
+          // receipt: {
+          //   items: purchasedProducts.map((product) => ({
+          //     description: product.data.name,
+          //     quantity: product.quantity,
+          //     amount: product.data.price,
+          //     currency: "usd",
+          //   })),
+          // },
+          payment_method_data: {
+            billing_details: billingDetails,
           },
-          name: userName,
+          shipping: {
+            address: {
+              city: addressFormValue.city,
+              country: addressFormValue.country,
+              line1: addressFormValue.line1,
+              line2: addressFormValue.line2,
+              postal_code: addressFormValue.postal_code,
+              state: addressFormValue.state,
+            },
+            name: userName,
+          },
+          // return_url: `${window.location}/completion`,
+          // return_url: `https://localhost:3000/completion`,
         },
-        // mandate_data: {
-        //   order_id: "asdasd",
-        //   // items: JSON.stringify(
-        //   //   purchasedProducts.map((product) => ({
-        //   //     description: product.data.name,
-        //   //     quantity: product.quantity,
-        //   //     amount: product.data.price,
-        //   //     currency: "usd",
-        //   //   }))
-        //   // ),
-        // },
-        // Make sure to change this to your payment completion page
-        // return_url: `${window.location}/completion`,
-        return_url: `https://localhost:3000/completion`,
-      },
-    })
+        redirect: "if_required",
+      })
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message)
-    } else {
-      setMessage("An unexpected error occured.")
+      if (paymentIntent.status === "succeeded") {
+        const address = paymentIntent.shipping.address
+
+        let productList = ""
+        purchasedProducts.forEach((product) => {
+          productList += `----------\n${product.data.name} - antal: ${product.quantity} - productID: ${product.product_id}\n`
+        })
+
+        const emailContent = `--- Ny Order ---\n\nPaymentID: ${
+          paymentIntent.id
+        }\nNamn: ${paymentIntent.shipping.name}\nEmail: ${
+          paymentIntent.receipt_email
+        }\nAddress: ${address.line1}, ${address.postal_code} ${address.city}\n${
+          address.line2 ? `Tilläggs-adress: ${address.line2}\n` : "\n"
+        }\n-------------------------------------------------------------------\n\nProdukter: \n${productList}\n-------------------------------------------------------------------\n\nTotal belop: ${
+          paymentIntent.amount
+        } SEK 
+        `
+
+        console.log(emailContent)
+      }
+
+      // if (error.type === "card_error" || error.type === "validation_error") {
+      //   setMessage(error.message)
+      // } else if (paymentIntent.status === "succeeded") {
+      //   console.log(paymentIntent.status)
+      //   console.log("Done....")
+      //   console.log({ error })
+      //   alert(error)
+      // } else {
+      //   setMessage("An unexpected error occured.")
+      // }
+    } catch (e) {
+      console.log({ error: e })
     }
 
     setIsProcessing(false)

@@ -77,6 +77,7 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
             },
             name: userName,
           },
+          return_url: `${window.location.origin}/completion`,
         },
         redirect: "if_required",
       })
@@ -86,12 +87,12 @@ const CheckoutForm = ({ setReciptEmail, purchasedProducts }) => {
         (error.type === "card_error" || error.type === "validation_error")
       ) {
         setMessage(error.message)
-      } else if (paymentIntent.status === "succeeded") {
+      } else if (paymentIntent && paymentIntent.status === "succeeded") {
         const address = paymentIntent.shipping.address
 
         let productList = ""
         purchasedProducts.forEach((product) => {
-          productList += `----------\n${product.data.name} - antal: ${product.quantity} - productID: ${product.product_id}\n`
+          productList += `----------\n${product.data.name} - antal: ${product.quantity} - SKU: ${product.data.sku}\n`
         })
 
         const emailContent = `--- Ny Order ---\n\nPaymentID: ${

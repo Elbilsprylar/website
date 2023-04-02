@@ -72,7 +72,15 @@ const ProductCard = ({ product }) => {
           !data.loading && addItemToCart({ productID: product.id ?? 0 })
         }
       >
-        <AddToCart />
+        {!data.loading ? (
+          <AddToCart />
+        ) : (
+          <div
+            className={cn(styles.loadingSpinner, {
+              [styles.loadingSpinnerActive]: data.loading,
+            })}
+          />
+        )}
       </button>
       <section className={styles.attributesSection}>
         {product &&

@@ -65,7 +65,7 @@ const CartItem = ({ product, upgradeItem, deleteItem }) => {
   )
 }
 
-const DummyCartItem = ({ product, upgradeItem, deleteItem }) => {
+const DummyCartItem = () => {
   return (
     <div className={styles.productWrapper}>
       <div className={styles.productInfo}>
@@ -219,14 +219,16 @@ const Checkout = () => {
       </div>
       <div className={styles.checkoutFormContainer}>
         {cartItemsData.data &&
-          cartItemsData.data.length > 0 &&
-          cartInfo &&
-          cartInfo.totalAmount && (
-            <PaymentElement
-              purchasedProducts={cartItemsData.data}
-              purchaseAmount={cartInfo.totalAmount ?? 0}
-            />
-          )}
+        cartItemsData.data.length > 0 &&
+        cartInfo &&
+        cartInfo.totalAmount ? (
+          <PaymentElement
+            purchasedProducts={cartItemsData.data}
+            purchaseAmount={cartInfo.totalAmount ?? 0}
+          />
+        ) : (
+          <div />
+        )}
       </div>
     </Wrapper>
   )

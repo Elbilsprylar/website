@@ -1,6 +1,9 @@
 @use "theme/_variables.scss" as *;
 
 .wrapper {
+  @media screen and (max-width: 700px) {
+    background: "red";
+  }
   .content {
     text-align: left;
     margin-top: var(--padding-content);

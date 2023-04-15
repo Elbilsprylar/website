@@ -29,7 +29,14 @@ const ProductCard = ({ product }) => {
     }
   }
 
-  const addItemToCart = async ({ productID }) => {
+  const addItemToCart = async () => {
+    let productID = null
+
+    if (product.variations?.length > 0) {
+      productID = product.variations[0]
+    } else if (product.id) {
+      productID = product.id
+    }
     setData((prevState) => ({
       ...prevState,
       loading: true,
@@ -68,9 +75,7 @@ const ProductCard = ({ product }) => {
       />
       <button
         className={cn(styles.cta, { [styles.loading]: data.loading })}
-        onClick={() =>
-          !data.loading && addItemToCart({ productID: product.id ?? 0 })
-        }
+        onClick={() => !data.loading && addItemToCart()}
       >
         {!data.loading ? (
           <AddToCart />

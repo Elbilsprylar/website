@@ -34,8 +34,8 @@ const CookieConsent = () => {
     <>
       {showConsent && shouldShowConsent() && (
         <div className={styles.cookieConsent}>
-          <CookieIcon />
-          <h4>Vi skräddarsyr din upplevelse!</h4>
+          {/* <CookieIcon /> */}
+          <h3>Vi skräddarsyr din upplevelse!</h3>
           <p>
             Elbilsprylar.com använder cookies för att skräddarsy din upplevelse
             och hålla vår webbplats tillförlitlig och säker. Du kan läsa mer om

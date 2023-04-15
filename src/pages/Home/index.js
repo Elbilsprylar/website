@@ -28,9 +28,9 @@ const Home = () => {
           backgroundImage: `url(${heroImg})`,
         }}
       >
-        <blockquote>
-          {homeHeroData && homeHeroData.heroTitle && homeHeroData.heroTitle}
-        </blockquote>
+        {homeHeroData && homeHeroData.heroTitle && homeHeroData.heroTitle && (
+          <blockquote>{homeHeroData.heroTitle}</blockquote>
+        )}
       </div>
       {/* <TrustBox /> */}
       <div className={styles.container}>

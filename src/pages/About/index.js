@@ -9,7 +9,7 @@ const About = () => {
   const pageData = data && !data.loading && data.data && data.data
 
   return (
-    <Wrapper className="about">
+    <Wrapper additionalClass={styles.about}>
       {pageData && pageData.title && <h1>{pageData.title.rendered}</h1>}
       {pageData && pageData.content ? (
         <div dangerouslySetInnerHTML={{ __html: pageData.content.rendered }} />

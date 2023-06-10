@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react"
 import cn from "classnames"
 import { Link, useLocation } from "react-router-dom"
 import { GetCategoriesCMS } from "providers/CategoriesProvider"
-import { useScrollPosition } from "hooks/useScrollPosition"
 import ProductsSearch from "./ProductsSearchComponent"
 import styles from "./Styles.module.scss"
 
 import { CartButton } from "components/CartButton"
-import { ReactComponent as CartIcon } from "assets/cart-icon.svg"
 import { ReactComponent as TelIcon } from "assets/tel.svg"
 import { ReactComponent as ArrowDown } from "assets/arrow-down.svg"
 import { ReactComponent as Logo } from "assets/logo_cropped.svg"
@@ -42,7 +40,7 @@ const NavigationBar = () => {
     return { innerWidth, innerHeight }
   }
   const [windowSize, setWindowSize] = useState(getWindowSize())
-  const scrollOffset = useScrollPosition()
+  const [showNavbar, setShowNavbar] = useState(true)
 
   useEffect(() => {
     function handleWindowResize() {
@@ -56,12 +54,27 @@ const NavigationBar = () => {
     }
   }, [])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 100) {
+        setShowNavbar(true)
+      } else {
+        setShowNavbar(false)
+      }
+    }
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
   return (
     <>
       <nav
         className={cn(
           styles.appNav,
-          scrollOffset > 80 && !mobileMenuShown && styles.appNavShown
+          !showNavbar && !mobileMenuShown && styles.appNavShown
         )}
       >
         <div className={styles.upperBar}>

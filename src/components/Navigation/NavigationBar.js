@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import cn from "classnames"
 import { Link, useLocation } from "react-router-dom"
 import { GetCategoriesCMS } from "providers/CategoriesProvider"
-import ProductsSearch from "./ProductsSearchComponent"
 import styles from "./Styles.module.scss"
 
 import { CartButton } from "components/CartButton"
@@ -11,6 +10,8 @@ import { ReactComponent as ArrowDown } from "assets/arrow-down.svg"
 import { ReactComponent as Logo } from "assets/logo_cropped.svg"
 import { ReactComponent as MenuIcon } from "assets/menu.svg"
 import { ReactComponent as CloseIcon } from "assets/close.svg"
+import { ReactComponent as Insta } from "assets/instaFooter.svg"
+import { GetFooterData } from "providers/FooterProvider"
 
 const NavigationBar = () => {
   const location = useLocation()
@@ -34,6 +35,11 @@ const NavigationBar = () => {
     { link: "/cookies", title: "Cookies" },
     { link: "/privacy-policy", title: "Privacy policy" },
   ]
+  const data = GetFooterData()
+  const infoLinks =
+    data && !data.loading && data.data && data.data.footerMenuItems.length > 0
+      ? data.data.footerMenuItems
+      : []
 
   const getWindowSize = () => {
     const { innerWidth, innerHeight } = window
@@ -83,80 +89,55 @@ const NavigationBar = () => {
             onMouseEnter={() => setTelMenuOpen(true)}
             onMouseLeave={() => setTelMenuOpen(false)}
           >
-            <TelIcon />
-            <p>Telefontid kl 09 - 17</p>
-            <ArrowDown
-              className={cn(styles.arrowDown, telMenuOpen && styles.arrowUp)}
-            />
-            <div
-              className={cn(styles.telContainer, {
-                [styles.telContainerShown]: telMenuOpen,
-              })}
+            <a
+              href="https://www.instagram.com/hugnaut/"
+              rel="noreferrer"
+              target="_blank"
             >
-              <section className={styles.telContainer__product}>
-                <h4>Produktrådgivning</h4>
-                <p>
-                  Alla Dagar 08-19 <br /> Vi hjälper dig med:
-                </p>
-                <ul>
-                  <li>Leveransfrågor</li>
-                  <li>Reklamationsfrågor</li>
-                </ul>
-                <a href="tel:0046712344567">071 234 4567</a>
-              </section>
-              <section className={styles.telContainer__costumerService}>
-                <h4>Kundservice</h4>
-                <p>
-                  Vardagar 08-15 <br /> Vi hjälper dig med:
-                </p>
-                <ul>
-                  <li>Produktfrågor</li>
-                  <li>Nya Beställningar</li>
-                </ul>
-                <a href="tel:0046712344567">071 234 4567</a>
-              </section>
-            </div>
+              <Insta />
+              <p>#iamhugnaut</p>
+              <p>@hugnaut</p>
+            </a>
           </div>
           <div className={cn(styles.upperBar__item, styles.storeTxt)}>
-            <p>Störst i norden på laddkablar</p>
+            <p>Fri frakt inom Sverige</p>
           </div>
         </div>
         {windowSize.innerWidth > 1000 ? (
           <>
             <div className={styles.topSection}>
-              <Link to="/">
+              <Link to="/" className={styles.topSectionLogo}>
                 <Logo />
               </Link>
-              <ProductsSearch />
+              <div className={styles.linksSection}>
+                <ul>
+                  <Link
+                    to={`/alla-produkter`}
+                    className={cn({
+                      [styles.activeLink]:
+                        location.pathname.includes("alla-produkter"),
+                    })}
+                  >
+                    Alla produkter
+                  </Link>
+                  {infoLinks.length > 0
+                    ? infoLinks.map((route) => (
+                        <Link
+                          key={route.title}
+                          to={`/${route.pageSlug}`}
+                          className={cn({
+                            [styles.activeLink]:
+                              location.pathname.split("/")[1] ===
+                              route.pageSlug,
+                          })}
+                        >
+                          {route.title}
+                        </Link>
+                      ))
+                    : null}
+                </ul>
+              </div>
               <CartButton />
-            </div>
-
-            <div className={styles.bottomSection}>
-              <ul>
-                <Link
-                  to={`/alla-produkter`}
-                  className={cn({
-                    [styles.activeLink]:
-                      location.pathname.includes("alla-produkter"),
-                  })}
-                >
-                  Alla produkter
-                </Link>
-                {list.length > 0
-                  ? list.map((route) => (
-                      <Link
-                        key={route.title}
-                        to={`/categories/${route.pageSlug}`}
-                        className={cn({
-                          [styles.activeLink]:
-                            location.pathname.split("/")[2] === route.pageSlug,
-                        })}
-                      >
-                        {route.title}
-                      </Link>
-                    ))
-                  : null}
-              </ul>
             </div>
           </>
         ) : (
@@ -195,11 +176,6 @@ const NavigationBar = () => {
             <Logo />
           </Link>
         </header>
-        <div className={styles.MenuHeader}>
-          <div className={styles.bottomSectionSearch}>
-            <ProductsSearch closeMenu={() => setMobileMenuShown(false)} />
-          </div>
-        </div>
         <aside className={styles.mobileNavMenu}>
           <Link
             to="/alla-produkter"
@@ -208,34 +184,7 @@ const NavigationBar = () => {
           >
             Alla Produkter
           </Link>
-          <div
-            className={styles.mobileNavMenuItem}
-            onClick={() => setMobileCategoriesShow(!mobileCategoriesShow)}
-          >
-            <p>Kategorier</p>
-            <ArrowDown
-              className={cn(
-                styles.arrowDown,
-                mobileCategoriesShow && styles.arrowUp
-              )}
-            />
-          </div>
 
-          <div
-            className={cn(styles.mobileNavCategories, {
-              [styles.mobileNavCategoriesShown]: mobileCategoriesShow,
-            })}
-          >
-            {list.map((route) => (
-              <Link
-                key={route.title}
-                to={`/categories/${route.pageSlug}`}
-                onClick={() => setMobileMenuShown(false)}
-              >
-                {route.title}
-              </Link>
-            ))}
-          </div>
           {mobileNavItems.map((item) => (
             <Link
               key={item.title}

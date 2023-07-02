@@ -3,8 +3,10 @@
 .appNav {
   position: sticky;
   top: 0;
+  right: 0;
+  left: 0;
   background: var(--navbar-color);
-  @include transition;
+  transition: transform 0.2s ease-out;
   z-index: 99;
 
   @media screen and (min-width: 1000px) {
@@ -13,19 +15,19 @@
 }
 
 .appNavShown {
-  transform: translateY(-155px);
+  transform: translateY(-38px);
 }
 
 .upperBar {
   width: 100%;
-  height: 56px;
+  height: 38px;
   background: var(--upper-bar-color);
   @include flex;
   flex-direction: row;
   justify-content: flex-start;
-  padding: 0 var(--padding-grid);
+  padding: 0 8rem;
   position: relative;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
 
   @media screen and (max-width: 1000px) {
@@ -45,6 +47,19 @@
     @include flex;
     flex-direction: row;
 
+    a {
+      @include flex;
+      flex-direction: row;
+
+      svg {
+        margin-left: 0 !important;
+      }
+
+      p:nth-of-type(1) {
+        margin-right: 0.5rem !important;
+      }
+    }
+
     svg {
       margin-right: 1rem;
     }
@@ -57,83 +72,19 @@
       transform: translateX(50%);
     }
   }
-
-  .telTimes {
-    height: 100%;
-    z-index: 1;
-    background-color: var(--upper-bar-color);
-    cursor: pointer;
-
-    svg {
-      margin: 0 1rem;
-    }
-  }
-
-  .telContainer {
-    background: var(--upper-bar-color);
-    padding: 0 calc(var(--padding-grid) / 2);
-    @include flex;
-    flex-direction: row;
-    position: absolute;
-    top: 100%;
-    height: 0;
-    overflow: hidden;
-    @include transition;
-    z-index: 3;
-    cursor: initial;
-
-    section {
-      @include flex;
-      align-items: flex-start;
-      width: 50%;
-      padding: 0 var(--padding-content);
-
-      &:last-of-type {
-        border-left: solid #eee 1px;
-      }
-
-      h4 {
-        margin-bottom: calc(var(--padding-grid) / 2);
-      }
-
-      p,
-      ul {
-        text-align: left;
-        color: #ccc;
-      }
-      ul {
-        padding-left: var(--padding-grid);
-        margin: calc(var(--padding-grid) / 2) 0 var(--padding-grid);
-        list-style: disc;
-      }
-
-      a {
-        width: 100%;
-        padding: calc(var(--padding-grid) / 2);
-        background: #eee;
-        color: var(--upper-bar-color);
-        border-radius: 0.2rem;
-      }
-    }
-  }
-
-  .telContainerShown {
-    height: 220px;
-    padding: var(--padding-grid) calc(var(--padding-grid) / 2);
-  }
-
-  .arrowDown {
-    margin-left: var(--padding-grid);
-    @include transition;
-  }
 }
 
 .topSection {
   @include flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 1.5rem 6rem 0;
-  padding-bottom: 1.5rem;
+  padding: 1rem 8rem;
+
+  .topSectionLogo {
+    svg {
+      max-width: 200px;
+    }
+  }
 
   .searchContainer {
     @media screen and (min-width: 1200px) {
@@ -165,8 +116,9 @@
   }
 }
 
-.bottomSection {
+.linksSection {
   overflow-y: hidden;
+  margin: 0 1rem;
   ul {
     @include flex;
     flex-direction: row;
@@ -178,8 +130,8 @@
       font-size: 0.9rem;
       font-weight: bold;
       position: relative;
-      padding: 0.4rem 1.5rem;
-      margin: 0.2rem;
+      padding: 0.5rem 1.5rem;
+      margin: 0 0.5rem;
       border-radius: 2rem;
       letter-spacing: 0.6px;
       font-family: "Mulish", sans-serif;
@@ -311,32 +263,6 @@
       @include flex;
       flex-direction: row;
       justify-content: space-between;
-    }
-
-    .mobileNavCategories {
-      @include flex;
-      align-items: stretch;
-      height: 0;
-      overflow: hidden;
-      @include transition;
-
-      a {
-        border-top: solid #fff2 2px;
-        text-align: left;
-        color: #bbb;
-        padding: 0.9rem var(--padding-content);
-        margin: 0 var(--padding-content);
-        @include transition;
-      }
-    }
-
-    .mobileNavCategoriesShown {
-      height: 460px;
-    }
-
-    .arrowDown {
-      margin-right: var(--padding-grid);
-      @include transition;
     }
   }
 }

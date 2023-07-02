@@ -37,9 +37,9 @@ const CookieConsent = () => {
           {/* <CookieIcon /> */}
           <h3>Vi skräddarsyr din upplevelse!</h3>
           <p>
-            Elbilsprylar.com använder cookies för att skräddarsy din upplevelse
-            och hålla vår webbplats tillförlitlig och säker. Du kan läsa mer om
-            hur vi gör det här.
+            Hugnaut.com använder cookies för att skräddarsy din upplevelse och
+            hålla vår webbplats tillförlitlig och säker. Du kan läsa mer om hur
+            vi gör det här.
           </p>
           <div className={styles.ctas}>
             <button onClick={handleAccept}>Acceptera</button>

@@ -56,7 +56,7 @@ const Categories = () => {
 
   return (
     <Wrapper additionalClass={styles.categories}>
-      <Helmet title={currentCategory?.title ?? "Elbilsprylar"} />
+      <Helmet title={currentCategory?.title ?? "Hugnaut"} />
       <div className={styles.descriptionContainer}>
         {!currentCategoryData.loading && currentCategoryData.data ? (
           <>

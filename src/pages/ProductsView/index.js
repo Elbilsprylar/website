@@ -2,11 +2,9 @@ import React, { useContext, useEffect, useState } from "react"
 import { ProductsContext } from "providers/ProductsProvider"
 import { Helmet } from "react-helmet"
 import { DummyCard } from "components/ProductCard"
-import FilterBar from "components/FilterBar"
 import "react-loading-skeleton/dist/skeleton.css"
 
 import Wrapper from "components/Wrapper"
-import Breadcrumbs from "components/Breadcrumbs"
 import ProductCard from "components/ProductCard"
 
 import styles from "./Styles.module.scss"
@@ -22,22 +20,11 @@ const ProductsView = () => {
     <Wrapper additionalClass={styles.products}>
       <div className={styles.container}>
         <Helmet title={"Alla produkter"} />
-        <div className={styles.breadcrumbsWrapper}>
-          <Breadcrumbs
-            links={[{ title: "Alla produkter", link: "/alla-produkter" }]}
-          />
-        </div>
-        <article className={styles.productsTitle}>
-          <h1>Alla produkter</h1>
-        </article>
-
-        <FilterBar />
-
         {productsData && !productsData.loading ? (
           <>
             {productsData.data && productsData.data.length > 0 ? (
               <div className={styles.productsContainer}>
-                {productsData.data.map((product, i) => (
+                {productsData.data.slice(0, 4).map((product, i) => (
                   <ProductCard
                     key={`${product.name}-${product.id}-${i}`}
                     product={product}
@@ -59,6 +46,12 @@ const ProductsView = () => {
             ))}
           </div>
         )}
+        <p className={styles.footNote}>
+          Hej, Du behöver inte scrolla mer.
+          <br /> Detta är allt vi har med det behövs inte mer för att bli en
+          mästare på att ge trygghet och närhet till dina lilla. Med andra ord
+          att bli en Haugnaut.
+        </p>
       </div>
     </Wrapper>
   )

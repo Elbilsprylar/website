@@ -77,11 +77,14 @@ footer a {
 :root {
   /* colors */
 
-  --color-primary: #227dd8;
+  /* --color-primary: #227dd8; */
+  --color-primary: #827377;
   --bg-color: #f8f8f8;
-  --navbar-color: #080344;
-  --footer-color: #080344;
-  --upper-bar-color: #06151e;
+  --navbar-color: #251f20;
+  --footer-color: #251f20;
+  --upper-bar-color: #403739;
+  /* --upper-bar-color: #463c3e; */
+  /* --upper-bar-color: #06151e; */
   --color-alert: #df1b41;
   --positive-color: #4caf50;
   --color-text-muted: #888;
@@ -90,6 +93,7 @@ footer a {
   /* size */
 
   --padding-page: 4rem;
+  --padding-content: 2rem;
   --padding-content: 2rem;
   --padding-grid: 1rem;
   --font-small: 0.8rem; /* 14px */

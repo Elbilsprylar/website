@@ -20,6 +20,21 @@ const Home = () => {
   const heroImg =
     homeHeroData && homeHeroData.heroImgURL && homeHeroData.heroImgURL
 
+  const infoList = [
+    {
+      title: "Förbättrad andning & syresättning",
+      text: "Vår bärtub kan med hjälp av hud-mot-hud-kontakt leda till stabilare andningsfrekvens, ökad syresättning av blodet och minskad risk för andningsproblem hos nyfödda",
+    },
+    {
+      title: "Rörelsefrihet för Mammor & Pappor",
+      text: "Håll ditt barn nära samtidigt som du har händerna fria att utföra dina sysslor.",
+    },
+    {
+      title: "Rapande och pruttande barn mår bättre",
+      text: "Vår bärtub underlättar naturlig gaspassage och bidra till att minska obehag i magen, vilket leder till en mer nöjd bebis.",
+    },
+  ]
+
   return (
     <Wrapper additionalClass={styles.home}>
       <div
@@ -32,15 +47,34 @@ const Home = () => {
           <blockquote>{homeHeroData.heroTitle}</blockquote>
         )}
       </div>
-      {/* <TrustBox /> */}
       <div className={styles.container}>
+        <section className={styles.infoBox}>
+          {infoList.map((info) => (
+            <div className={styles.box}>
+              <h3>{info.title}</h3>
+              <p>{info.text}</p>
+            </div>
+          ))}
+        </section>
+        <div className={styles.postsContainer}>
+          <div className={styles.posts}>
+            {posts_data &&
+              posts_data.data &&
+              posts_data.data.map((item, i) => (
+                <div
+                  key={`${item.title?.rendered}-${i}`}
+                  className={styles.post}
+                >
+                  <span>nyhet</span>
+                  <h3>{item.title?.rendered ?? "Reklam"}</h3>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: item.content?.rendered }}
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
         <div className={styles.popProducts}>
-          <article className={styles.productHeader}>
-            <h2>Populärt just nu</h2>
-            <Link to="/alla-produkter" className={styles.productHeaderLink}>
-              se alla {">"}
-            </Link>
-          </article>
           {productsData && !productsData.loading ? (
             <>
               {productsData.data && productsData.data.length > 0 ? (
@@ -62,24 +96,6 @@ const Home = () => {
               ))}
             </div>
           )}
-        </div>
-        <div className={styles.postsContainer}>
-          <div className={styles.posts}>
-            {posts_data &&
-              posts_data.data &&
-              posts_data.data.map((item, i) => (
-                <div
-                  key={`${item.title?.rendered}-${i}`}
-                  className={styles.post}
-                >
-                  <span>nyhet</span>
-                  <h3>{item.title?.rendered ?? "Reklam"}</h3>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: item.content?.rendered }}
-                  />
-                </div>
-              ))}
-          </div>
         </div>
       </div>
     </Wrapper>

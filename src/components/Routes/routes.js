@@ -47,7 +47,7 @@ const Routes = () => {
                         <CartProvider>
                           <PostsProvider>
                             <Router>
-                              <Helmet title="Elbilsprylar.com" />
+                              <Helmet title="hugnaut.com" />
                               <NavigationBar />
                               <Switch>
                                 <Route path={"/"} exact component={Home} />

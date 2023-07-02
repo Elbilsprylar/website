@@ -3,7 +3,7 @@
 .products {
   position: relative;
   align-items: flex-start;
-  padding: var(--padding-page) var(--padding-grid);
+  padding: var(--padding-content) var(--padding-grid);
 
   .container {
     width: 100%;
@@ -15,21 +15,7 @@
   }
 
   @media screen and (min-width: 1000px) {
-    padding: var(--padding-page) var(--padding-content);
-  }
-
-  .breadcrumbsWrapper {
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    background: var(--color-breadcrumbs-wrapper);
-    padding: 0.5rem 1rem;
-
-    @media screen and (min-width: 1400px) {
-      padding: 0.5rem var(--padding-page);
-    }
+    padding: var(--padding-grid) var(--padding-content);
   }
 
   .productsTitle {
@@ -69,4 +55,13 @@
 .noProductsContainer {
   padding-top: var(--padding-page);
   margin: 0 auto;
+}
+
+.footNote {
+  margin-top: var(--padding-content);
+  text-align: center;
+  max-width: 70ch;
+  font-size: 1rem;
+  font-weight: 600;
+  align-self: center;
 }

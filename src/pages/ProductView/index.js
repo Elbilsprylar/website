@@ -79,7 +79,7 @@ const ProductsView = () => {
 
   return (
     <Wrapper additionalClass={styles.product}>
-      <Helmet title={product?.name ?? "Elbilsprylar"} />
+      <Helmet title={product?.name ?? "Hugnaut"} />
       <div className={styles.breadcrumbsWrapper}>
         {product && product.categories && product.categories.length > 0 && (
           <Breadcrumbs
